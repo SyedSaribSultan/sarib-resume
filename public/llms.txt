@@ -1,0 +1,32 @@
+# Syed Sarib Sultan
+
+> Product Designer in Islamabad, Pakistan. End-to-end product design and growth across consumer AI products at ImagineArt and Chatly. Covers the whole craft — research, UX, interface, interaction, design systems — plus onboarding, pricing, and growth, with every flow built to move conversion and ROAS. Computer Science background; prototypes in code using Figma MCP and Claude Code.
+
+## Contact
+- Email: sadakhan2002@gmail.com
+- LinkedIn: https://linkedin.com/in/syedsaribsultanyac270
+- Site: https://syedsaribsultan.vercel.app
+
+## Current role — Product Design & Growth, Vyro (2025 — Present, Islamabad, on-site)
+Drove design across ImagineArt and Chatly, scaling the shared design system while owning end-to-end design for AI-powered features across the visual, productivity, motion, and audio suites.
+
+- Chatly + ImagineArt — Sites (Present): Led end-to-end design for Sites, Chatly's AI web app builder, in partnership with ImagineArt — custom authentication, growth loops, landing pages, dashboards. Generated production visuals with AI; built Figma MCP and Claude Code prototypes to cut dev-handoff friction. (https://chatlyai.app)
+- Chatly (Feb 2026 — Present): Owned design across the full product — core features plus activation and revenue flows. Designed AI Images, Videos, Music, auth, settings, onboarding, custom dashboards, native mobile. Rebuilt the referral system (50% off for referred users, 7,000 credits per paid upgrade) and rewrote the paywall into three A/B-tested variants. Ran Mixpanel funnel analysis across 1.13M signups, isolating a segment converting at 0.43% vs a 1.04% baseline, then shipped the fix. (https://chatlyai.app)
+- ImagineArt (2025 — Feb 2026): Shipped end-to-end design for four core products — Imagine Apps Suite, Assets, AI Avatar Studio, AI Video Studio — plus the Workflows surface. (https://imagine.art)
+
+## Other experience
+- Founder, sxtudios (2025 — Present): Independent studio — product design and brand work for early-stage clients, prototyping in code.
+- Product Design, Marketing & Growth, Parhlai (2025 — Present): Scaled from digital marketing into a growth-consulting remit owning acquisition and retention.
+- Lead UI/UX Engineer, NorenzTech (2024 — 2025): Owned interface design and front-end build, designed in Figma and shipped in code.
+- UX Designer, easytect UG (2024, Germany, remote): Reworked core product flows.
+- Earlier: Graphic Designer at ACM Pakistan (2022 — 2024); marketing/creative-lead roles at Career Konnect and Shadiyana (2025).
+
+## Skills
+- Design: Product & UX design, interaction design, design systems, prototyping, responsive layouts
+- Build: Front-end and HTML prototypes, AI product building, prompt engineering, agentic dev tools
+- Growth: Paywall and upgrade flows, pricing and credit packs, referral systems, onboarding, conversion copywriting, A/B testing
+- Data: Mixpanel funnels and retention analysis, GrowthBook, defining the metric a design should move
+- Tools: Figma, Mixpanel, GrowthBook, Notion, AI image/video models (Kling, Seedance, Veo, Nano Banana, fal API)
+
+## Education
+- BS, Computer Science — National University of Sciences and Technology (NUST), Islamabad (2022 — 2026)

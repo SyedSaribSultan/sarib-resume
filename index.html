@@ -18,6 +18,8 @@
 
     <!-- Open Graph / social share -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Syed Sarib Sultan" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="Syed Sarib Sultan — Product Designer" />
     <meta
       property="og:description"
@@ -39,6 +41,41 @@
     <meta name="twitter:image" content="https://syedsaribsultan.vercel.app/og.png" />
 
     <link rel="canonical" href="https://syedsaribsultan.vercel.app" />
+
+    <!-- Structured data: lets search engines and AI crawlers read who this is,
+         the current role/employer, and verified social profiles. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Syed Sarib Sultan",
+        "alternateName": "Sarib",
+        "url": "https://syedsaribsultan.vercel.app",
+        "image": "https://syedsaribsultan.vercel.app/og.png",
+        "jobTitle": "Product Designer",
+        "description": "Product Designer focused on end-to-end product design and growth across consumer AI products at ImagineArt and Chatly.",
+        "worksFor": { "@type": "Organization", "name": "Vyro", "url": "https://imagine.art" },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Islamabad",
+          "addressCountry": "PK"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "National University of Sciences and Technology (NUST)"
+        },
+        "knowsAbout": [
+          "Product Design",
+          "UX Design",
+          "Design Systems",
+          "Growth Design",
+          "AI Product Design",
+          "Conversion Optimization"
+        ],
+        "email": "mailto:sadakhan2002@gmail.com",
+        "sameAs": ["https://linkedin.com/in/syedsaribsultanyac270"]
+      }
+    </script>
 
     <!-- Pre-paint theme: set the page background before React mounts so dark-mode
          users don't see a light flash (FOUC). Mirrors App.tsx palette + storage key. -->

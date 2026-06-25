@@ -1,0 +1,27 @@
+# Allow all crawlers, including AI assistants and search engines.
+User-agent: *
+Allow: /
+
+# Explicitly welcome AI crawlers so this profile is discoverable in AI answers.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://syedsaribsultan.vercel.app/sitemap.xml
