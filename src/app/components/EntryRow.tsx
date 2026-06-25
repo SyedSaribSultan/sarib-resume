@@ -103,31 +103,6 @@ export function EntryRow({ entry }: EntryRowProps) {
           </Stack>
         )}
 
-        {entry.sections && (
-          <Stack spacing={{ xs: 1.75, sm: 2 }} sx={{ mt: 2 }}>
-            {entry.sections.map((s) => (
-              <Box key={s.label}>
-                <Typography
-                  sx={{
-                    fontSize: '0.8125rem',
-                    fontWeight: 500,
-                    color: 'text.primary',
-                    letterSpacing: '0.04em',
-                    textTransform: 'uppercase',
-                    lineHeight: 1.4,
-                    mb: 0.25,
-                  }}
-                >
-                  {s.label}
-                </Typography>
-                <Typography sx={{ fontSize: '1rem', color: 'text.secondary', lineHeight: 1.6 }}>
-                  {s.text}
-                </Typography>
-              </Box>
-            ))}
-          </Stack>
-        )}
-
         {/* Roles — sub-positions within one company, shown as a dot + connector
             line timeline (newest first), mirroring the LinkedIn pattern. */}
         {entry.roles && (
@@ -184,6 +159,31 @@ export function EntryRow({ entry }: EntryRowProps) {
                 </Box>
               );
             })}
+          </Stack>
+        )}
+
+        {entry.sections && (
+          <Stack spacing={{ xs: 1.75, sm: 2 }} sx={{ mt: 2 }}>
+            {entry.sections.map((s) => (
+              <Box key={s.label}>
+                <Typography
+                  sx={{
+                    fontSize: '0.8125rem',
+                    fontWeight: 500,
+                    color: 'text.primary',
+                    letterSpacing: '0.04em',
+                    textTransform: 'uppercase',
+                    lineHeight: 1.4,
+                    mb: 0.25,
+                  }}
+                >
+                  {s.label}
+                </Typography>
+                <Typography sx={{ fontSize: '1rem', color: 'text.secondary', lineHeight: 1.6 }}>
+                  {s.text}
+                </Typography>
+              </Box>
+            ))}
           </Stack>
         )}
       </Box>
