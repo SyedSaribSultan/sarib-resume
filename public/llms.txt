@@ -5,7 +5,7 @@
 ## Contact
 - Email: sadakhan2002@gmail.com
 - LinkedIn: https://linkedin.com/in/syedsaribsultanyac270
-- Site: https://syedsaribsultan.vercel.app
+- Site: https://sarib-resume.vercel.app
 
 ## Current role — Product Design & Growth, Vyro (2025 — Present, Islamabad, on-site)
 Drove design across ImagineArt and Chatly, scaling the shared design system while owning end-to-end design for AI-powered features across the visual, productivity, motion, and audio suites.

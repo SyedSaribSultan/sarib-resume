@@ -24,4 +24,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://syedsaribsultan.vercel.app/sitemap.xml
+Sitemap: https://sarib-resume.vercel.app/sitemap.xml
