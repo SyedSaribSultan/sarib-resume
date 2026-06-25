@@ -7,6 +7,7 @@ export interface Role {
   label: string;
   text: string;
   description?: string;
+  href?: string;
 }
 
 export interface ResumeEntry {
@@ -71,16 +72,19 @@ export const experience: ResumeEntry[] = [
       {
         label: 'Chatly + ImagineArt',
         text: 'Present',
+        href: 'https://chatlyai.app',
         description: "Led end-to-end design for Sites, Chatly's AI web app builder, in partnership with ImagineArt, owning the full journey from custom authentication and growth loops to landing pages and dashboards. Generated production visuals with AI and built Figma MCP and Claude Code prototypes that cut friction out of dev handoff.",
       },
       {
         label: 'Chatly',
         text: 'Feb 2026 — Present',
+        href: 'https://chatlyai.app',
         description: 'Owned design across the full product, from core feature surfaces to the activation and revenue flows that determine whether users stay and pay. Designed AI Images, Videos, and Music, authentication and settings, post-signup and post-purchase onboarding, custom dashboards, and native mobile experiences. Rebuilt the referral system end to end (50% off for referred users, 7,000 credits per paid upgrade) and rewrote the paywall into three A/B-tested variants.',
       },
       {
         label: 'ImagineArt',
         text: '2025 — Feb 2026',
+        href: 'https://imagine.art',
         description: 'Shipped end-to-end design for four core products, the Imagine Apps Suite, Assets, AI Avatar Studio, and AI Video Studio, plus the Workflows surface, carrying each from first concept to dev-ready handoff.',
       },
     ],

@@ -144,9 +144,31 @@ export function EntryRow({ entry }: EntryRowProps) {
                     )}
                   </Box>
                   <Box>
-                    <Typography sx={{ fontSize: '1rem', fontWeight: 500, color: 'text.primary', lineHeight: 1.4 }}>
-                      {r.label}
-                    </Typography>
+                    {r.href ? (
+                      <Link
+                        href={r.href}
+                        target="_blank"
+                        rel="noopener"
+                        underline="hover"
+                        color="text.primary"
+                        sx={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: 0.25,
+                          fontSize: '1rem',
+                          fontWeight: 500,
+                          lineHeight: 1.4,
+                          '&:hover svg': { transform: 'translate(1px, -1px)' },
+                        }}
+                      >
+                        {r.label}
+                        <ArrowUpRight size={15} style={{ transition: 'transform 120ms ease' }} />
+                      </Link>
+                    ) : (
+                      <Typography sx={{ fontSize: '1rem', fontWeight: 500, color: 'text.primary', lineHeight: 1.4 }}>
+                        {r.label}
+                      </Typography>
+                    )}
                     <Typography sx={{ fontSize: '1rem', color: 'text.secondary', lineHeight: 1.4 }}>
                       {r.text}
                     </Typography>
