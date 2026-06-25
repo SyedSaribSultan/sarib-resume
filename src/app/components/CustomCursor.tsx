@@ -75,7 +75,9 @@ export function CustomCursor() {
   }, [finePointer]);
 
   // No custom cursor on touch / coarse pointers — native cursor stays intact.
-  if (!finePointer) return null;
+  // Also treat reduced-motion as an opt-out: keep the native cursor and all its
+  // affordances (text, pointer, etc.) for users who ask for less motion.
+  if (!finePointer || reducedMotion) return null;
 
   const RING_SIZE = 15;
   const DOT_SIZE = 6;

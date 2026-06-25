@@ -22,13 +22,16 @@ const palettes = {
   light: {
     mode: 'light' as const,
     background: { default: '#fbfbfa', paper: '#ffffff' },
-    text: { primary: '#1c1c1a', secondary: '#6f6f68', disabled: '#b7b7af' },
+    // disabled darkened from #b7b7af -> #6e6e66 so left-column labels/periods
+    // (rendered with text.disabled) clear WCAG AA 4.5:1 on the page background.
+    text: { primary: '#1c1c1a', secondary: '#6f6f68', disabled: '#6e6e66' },
     divider: 'rgba(0,0,0,0.08)',
   },
   dark: {
     mode: 'dark' as const,
     background: { default: '#121211', paper: '#1a1a18' },
-    text: { primary: '#ededea', secondary: '#9a9a91', disabled: '#5b5b54' },
+    // disabled lightened from #5b5b54 -> #8c8c83 to clear AA on dark background.
+    text: { primary: '#ededea', secondary: '#9a9a91', disabled: '#8c8c83' },
     divider: 'rgba(255,255,255,0.1)',
   },
 };
@@ -100,6 +103,9 @@ export default function App() {
             <Avatar
               alt={profile.name}
               src={profilePhoto}
+              slotProps={{
+                img: { width: 96, height: 96, loading: 'eager', decoding: 'async' },
+              }}
               sx={{
                 width: 96,
                 height: 96,
