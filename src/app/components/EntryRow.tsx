@@ -168,11 +168,9 @@ export function EntryRow({ entry }: EntryRowProps) {
               <Box key={s.label}>
                 <Typography
                   sx={{
-                    fontSize: '0.8125rem',
+                    fontSize: '1rem',
                     fontWeight: 500,
                     color: 'text.primary',
-                    letterSpacing: '0.04em',
-                    textTransform: 'uppercase',
                     lineHeight: 1.4,
                     mb: 0.25,
                   }}

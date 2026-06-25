@@ -125,7 +125,7 @@ export default function App() {
                 sx={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  fontSize: '0.95rem',
+                  fontSize: '1rem',
                   mt: 1,
                   px: 1.25,
                   py: 0.25,
