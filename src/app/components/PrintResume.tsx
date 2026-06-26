@@ -52,6 +52,11 @@ function emphasize(text: string): ReactNode {
 }
 
 // ---- shared style fragments -------------------------------------------------
+// Vertical rhythm. Generous gaps keep entries from crowding and reduce the
+// chance a page break lands awkwardly mid-section.
+const ENTRY_GAP = 26; // between top-level entries within a section
+const SECTION_GAP = 34; // between sections (Experience -> Leadership -> ...)
+
 const sectionLabel: CSSProperties = {
   gridColumn: 1,
   fontSize: 9.5,
@@ -97,10 +102,10 @@ function Row({
   );
 }
 
-// Render one experience/volunteering entry, flattening nested sub-roles into
-// indented sub-rows (the "sub-roles as entries" treatment).
-function entryRows(e: ResumeEntry, label?: string): ReactNode[] {
-  const rows: ReactNode[] = [];
+// Render one experience/volunteering entry as a single group: the parent row
+// plus its indented sub-roles, wrapped so a page break never splits an entry
+// from its children. Sub-roles use the "sub-roles as entries" treatment.
+function EntryGroup({ e, label }: { e: ResumeEntry; label?: string }) {
   const hasChildren = !!(e.roles && e.roles.length) || !!(e.sections && e.sections.length);
 
   // Fold thematic sections (Leadership/Engineering/Growth & Data/...) into the
@@ -119,43 +124,38 @@ function entryRows(e: ResumeEntry, label?: string): ReactNode[] {
     <div style={detail}>{emphasize(e.description)}</div>
   ) : null;
 
-  rows.push(
-    <Row
-      key={e.id}
-      label={label}
-      gap={hasChildren ? 10 : 18}
-      mid={
-        <>
-          <div style={company}>{e.subtitle ?? e.title}</div>
-          {e.subtitle && <div style={roleLine}>{e.title}</div>}
-          <div style={periodLine}>{e.period}</div>
-          {e.meta && <div style={periodLine}>{e.meta}</div>}
-        </>
-      }
-      detail={sectionDetail}
-    />,
-  );
-
-  // Sub-roles become indented mid-column rows under the parent.
-  e.roles?.forEach((r, idx) => {
-    const isLast = idx === e.roles!.length - 1;
-    rows.push(
+  return (
+    // The whole entry (parent + sub-roles) stays on one page.
+    <div style={{ breakInside: 'avoid', paddingBottom: ENTRY_GAP }}>
       <Row
-        key={`${e.id}-${r.label}`}
-        gap={isLast ? 18 : 8}
-        indent
+        label={label}
+        gap={hasChildren ? 10 : 0}
         mid={
           <>
-            <div style={{ ...company, fontSize: 11 }}>{r.label}</div>
-            <div style={periodLine}>{r.text}</div>
+            <div style={company}>{e.subtitle ?? e.title}</div>
+            {e.subtitle && <div style={roleLine}>{e.title}</div>}
+            <div style={periodLine}>{e.period}</div>
+            {e.meta && <div style={periodLine}>{e.meta}</div>}
           </>
         }
-        detail={r.description ? <div style={detail}>{emphasize(r.description)}</div> : null}
-      />,
-    );
-  });
-
-  return rows;
+        detail={sectionDetail}
+      />
+      {e.roles?.map((r, idx) => (
+        <Row
+          key={`${e.id}-${r.label}`}
+          gap={idx === e.roles!.length - 1 ? 0 : 8}
+          indent
+          mid={
+            <>
+              <div style={{ ...company, fontSize: 11 }}>{r.label}</div>
+              <div style={periodLine}>{r.text}</div>
+            </>
+          }
+          detail={r.description ? <div style={detail}>{emphasize(r.description)}</div> : null}
+        />
+      ))}
+    </div>
+  );
 }
 
 export function PrintResume() {
@@ -203,55 +203,65 @@ export function PrintResume() {
       </header>
 
       {/* Experience */}
-      {experience.map((e, i) => entryRows(e, i === 0 ? 'Experience' : undefined))}
+      <section style={{ paddingBottom: SECTION_GAP }}>
+        {experience.map((e, i) => (
+          <EntryGroup key={e.id} e={e} label={i === 0 ? 'Experience' : undefined} />
+        ))}
+      </section>
 
-      {/* Leadership (volunteering) */}
-      <div style={{ height: 8 }} />
-      {volunteering.map((e, i) =>
-        // volunteering has no nested roles; one row each.
-        <Row
-          key={e.id}
-          label={i === 0 ? 'Leadership' : undefined}
-          mid={
-            <>
-              <div style={company}>{e.title}</div>
-              {e.subtitle && <div style={roleLine}>{e.subtitle}</div>}
-              <div style={periodLine}>{e.period}</div>
-            </>
-          }
-          detail={e.description ? <div style={detail}>{emphasize(e.description)}</div> : null}
-        />,
-      )}
+      {/* Leadership (volunteering) — no nested roles. */}
+      <section style={{ paddingBottom: SECTION_GAP }}>
+        {volunteering.map((e, i) => (
+          <div key={e.id} style={{ breakInside: 'avoid', paddingBottom: ENTRY_GAP }}>
+            <Row
+              label={i === 0 ? 'Leadership' : undefined}
+              gap={0}
+              mid={
+                <>
+                  <div style={company}>{e.title}</div>
+                  {e.subtitle && <div style={roleLine}>{e.subtitle}</div>}
+                  <div style={periodLine}>{e.period}</div>
+                </>
+              }
+              detail={e.description ? <div style={detail}>{emphasize(e.description)}</div> : null}
+            />
+          </div>
+        ))}
+      </section>
 
       {/* Education */}
-      <div style={{ height: 8 }} />
-      {education.map((e, i) => (
-        <Row
-          key={e.id}
-          label={i === 0 ? 'Education' : undefined}
-          mid={
-            <>
-              <div style={company}>{e.subtitle ?? e.title}</div>
-              {e.subtitle && <div style={roleLine}>{e.title}</div>}
-              <div style={periodLine}>{e.period}</div>
-              {e.meta && <div style={periodLine}>{e.meta}</div>}
-            </>
-          }
-          detail={null}
-        />
-      ))}
+      <section style={{ paddingBottom: SECTION_GAP }}>
+        {education.map((e, i) => (
+          <div key={e.id} style={{ breakInside: 'avoid', paddingBottom: ENTRY_GAP }}>
+            <Row
+              label={i === 0 ? 'Education' : undefined}
+              gap={0}
+              mid={
+                <>
+                  <div style={company}>{e.subtitle ?? e.title}</div>
+                  {e.subtitle && <div style={roleLine}>{e.title}</div>}
+                  <div style={periodLine}>{e.period}</div>
+                  {e.meta && <div style={periodLine}>{e.meta}</div>}
+                </>
+              }
+              detail={null}
+            />
+          </div>
+        ))}
+      </section>
 
       {/* Skills */}
-      <div style={{ height: 8 }} />
-      {skills.map((s, i) => (
-        <Row
-          key={s.id}
-          label={i === 0 ? 'Skills' : undefined}
-          gap={10}
-          mid={<div style={{ ...company, fontSize: 11 }}>{s.label}</div>}
-          detail={<div style={detail}>{s.value}</div>}
-        />
-      ))}
+      <section style={{ breakInside: 'avoid' }}>
+        {skills.map((s, i) => (
+          <Row
+            key={s.id}
+            label={i === 0 ? 'Skills' : undefined}
+            gap={12}
+            mid={<div style={{ ...company, fontSize: 11 }}>{s.label}</div>}
+            detail={<div style={detail}>{s.value}</div>}
+          />
+        ))}
+      </section>
     </div>
   );
 }
