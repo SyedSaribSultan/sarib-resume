@@ -75,13 +75,11 @@ function Row({
   label,
   mid,
   detail: detailNode,
-  indent = false,
   gap = 18,
 }: {
   label?: string;
   mid: ReactNode;
   detail?: ReactNode;
-  indent?: boolean;
   gap?: number;
 }) {
   return (
@@ -95,7 +93,7 @@ function Row({
       }}
     >
       <div style={sectionLabel}>{label ?? ''}</div>
-      <div style={{ gridColumn: 2, paddingLeft: indent ? 14 : 0 }}>{mid}</div>
+      <div style={{ gridColumn: 2 }}>{mid}</div>
       <div style={{ gridColumn: 3 }}>{detailNode}</div>
     </div>
   );
@@ -153,7 +151,6 @@ function EntryGroup({ e, label }: { e: ResumeEntry; label?: string }) {
         <Row
           key={`${e.id}-${r.label}`}
           gap={idx === printRoles.length - 1 ? 0 : 8}
-          indent
           mid={
             <>
               <div style={{ ...company, fontSize: 11 }}>{r.label}</div>
