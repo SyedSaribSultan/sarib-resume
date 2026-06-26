@@ -25,7 +25,7 @@ const INK = '#1c1c1a'; // text.primary
 const MUTED = '#6f6f68'; // text.secondary
 const FAINT = '#9a9a91'; // periods / faint detail
 const LINK = '#3a5ccc'; // restrained ink-blue, print-only (matches reference)
-const PAGE = '#fbfbfa';
+const PAGE = '#ffffff';
 
 const SANS = '"Google Sans Flex", -apple-system, BlinkMacSystemFont, sans-serif';
 
