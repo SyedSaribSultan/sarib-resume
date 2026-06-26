@@ -40,7 +40,7 @@ function emphasize(text: string): ReactNode {
     const start = m.index ?? 0;
     if (start > last) out.push(text.slice(last, start));
     out.push(
-      <strong key={i++} style={{ fontWeight: 600, color: INK }}>
+      <strong key={i++} style={{ fontWeight: 500, color: INK }}>
         {m[1]}
       </strong>,
     );
@@ -53,8 +53,8 @@ function emphasize(text: string): ReactNode {
 // ---- shared style fragments -------------------------------------------------
 // Tight vertical rhythm — keeps the doc compact (aim ~1 page) while leaving
 // enough air that page breaks don't crowd.
-const ENTRY_GAP = 9; // between top-level entries within a section
-const SECTION_GAP = 12; // between sections (Experience -> Leadership -> ...)
+const ENTRY_GAP = 14; // between top-level entries within a section
+const SECTION_GAP = 28; // between sections (Experience -> Education -> Skills)
 
 const sectionLabel: CSSProperties = {
   gridColumn: 1,
@@ -65,7 +65,7 @@ const sectionLabel: CSSProperties = {
   fontWeight: 400,
   paddingTop: 1,
 };
-const company: CSSProperties = { fontSize: 11, fontWeight: 600, color: INK, lineHeight: 1.3 };
+const company: CSSProperties = { fontSize: 11, fontWeight: 500, color: INK, lineHeight: 1.3 };
 const roleLine: CSSProperties = { fontSize: 11, color: INK, lineHeight: 1.3 };
 const periodLine: CSSProperties = { fontSize: 10, color: FAINT, lineHeight: 1.3, marginTop: 1 };
 const detail: CSSProperties = { fontSize: 10.5, color: MUTED, lineHeight: 1.34 };
@@ -109,10 +109,14 @@ function EntryGroup({ e, label }: { e: ResumeEntry; label?: string }) {
   // dropping filler lines (e.g. Leadership/Socials) to stay concise. The live
   // site still shows all sections from the shared data.
   const printSections = e.sections?.filter((s) => s.text.includes('**'));
-  // Likewise drop tall, metric-less descriptive sub-roles from the PDF; keep
-  // position-only sub-roles (no description — cheap history) and any whose
-  // description carries a metric.
-  const printRoles = e.roles?.filter((r) => !r.description || r.description.includes('**'));
+  // PDF sub-role rules (live site shows all): drop tall, metric-less
+  // descriptive sub-roles, then collapse a pure position-history stack (roles
+  // with no description, e.g. Parhlai's promotions) to just the latest one —
+  // data is newest-first, so keep index 0.
+  let printRoles = e.roles?.filter((r) => !r.description || r.description.includes('**'));
+  if (printRoles && printRoles.every((r) => !r.description)) {
+    printRoles = printRoles.slice(0, 1);
+  }
   const hasChildren = !!(printRoles && printRoles.length) || !!(printSections && printSections.length);
 
   const sectionDetail = printSections && printSections.length ? (
@@ -120,7 +124,7 @@ function EntryGroup({ e, label }: { e: ResumeEntry; label?: string }) {
       {e.description && <div style={detail}>{emphasize(e.description)}</div>}
       {printSections.map((s) => (
         <div key={s.label} style={detail}>
-          <span style={{ fontWeight: 600, color: INK }}>{s.label}. </span>
+          <span style={{ fontWeight: 500, color: INK }}>{s.label}. </span>
           {emphasize(s.text)}
         </div>
       ))}
@@ -189,7 +193,7 @@ export function PrintResume() {
         }}
       >
         <div>
-          <div style={{ fontSize: 13, letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 600, color: INK }}>
+          <div style={{ fontSize: 13, letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 500, color: INK }}>
             {profile.name}
           </div>
           <div style={{ fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: MUTED, marginTop: 4 }}>
@@ -253,7 +257,7 @@ export function PrintResume() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
             {skills.map((s) => (
               <div key={s.id} style={detail}>
-                <span style={{ fontWeight: 600, color: INK }}>{s.label}.</span> {s.value}
+                <span style={{ fontWeight: 500, color: INK }}>{s.label}.</span> {s.value}
               </div>
             ))}
           </div>

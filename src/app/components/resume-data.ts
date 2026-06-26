@@ -79,7 +79,7 @@ export const experience: ResumeEntry[] = [
         label: 'Chatly',
         text: 'Feb 2026 — Present',
         href: 'https://chatlyai.app',
-        description: 'Owned design across the full product — AI Images, Videos and Music, auth and settings, onboarding, dashboards, and native mobile. Rebuilt the referral system end to end (**50% off** referred, **7,000** credits per upgrade) and rewrote the paywall into **three** A/B-tested variants.',
+        description: 'Owned design across the full product, from core surfaces to the activation and revenue flows. Rebuilt the referral system end to end (**50% off** referred, **7,000** credits per upgrade) and rewrote the paywall into **three** A/B-tested variants.',
       },
       {
         label: 'ImagineArt',
