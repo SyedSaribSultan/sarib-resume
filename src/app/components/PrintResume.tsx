@@ -166,9 +166,10 @@ export function PrintResume() {
         color: INK,
         fontFamily: SANS,
         width: '8.5in',
-        minHeight: '11in',
         margin: '0 auto',
-        padding: '0.6in 0.7in',
+        // Horizontal gutters only — vertical breathing room comes from the
+        // @page top/bottom margins so it applies on every page-break edge too.
+        padding: '0 0.7in',
         boxSizing: 'border-box',
         WebkitFontSmoothing: 'antialiased',
       }}
@@ -250,16 +251,18 @@ export function PrintResume() {
         ))}
       </section>
 
-      {/* Skills */}
-      <section style={{ breakInside: 'avoid' }}>
+      {/* Skills — each row is its own unbreakable unit (no avoid on the whole
+          block, which would force a large gap if it can't fit). */}
+      <section>
         {skills.map((s, i) => (
-          <Row
-            key={s.id}
-            label={i === 0 ? 'Skills' : undefined}
-            gap={12}
-            mid={<div style={{ ...company, fontSize: 11 }}>{s.label}</div>}
-            detail={<div style={detail}>{s.value}</div>}
-          />
+          <div key={s.id} style={{ breakInside: 'avoid', paddingBottom: 12 }}>
+            <Row
+              label={i === 0 ? 'Skills' : undefined}
+              gap={0}
+              mid={<div style={{ ...company, fontSize: 11 }}>{s.label}</div>}
+              detail={<div style={detail}>{s.value}</div>}
+            />
+          </div>
         ))}
       </section>
     </div>

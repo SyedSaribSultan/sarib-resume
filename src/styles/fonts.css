@@ -9,11 +9,12 @@
   body {
     background: #fbfbfa !important;
   }
-  /* Bleed the page colour to the sheet edges (no white margin frame). The
-     PrintResume component owns its own inner padding. */
+  /* Comfortable top/bottom margins on EVERY page (incl. page-break edges) so
+     content never jams against the cut line. Left/right stay 0 so the page
+     colour still bleeds full-width; PrintResume owns the horizontal padding. */
   @page {
     size: letter;
-    margin: 0;
+    margin: 0.6in 0;
   }
   body {
     margin: 0 !important;
