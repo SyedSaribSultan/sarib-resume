@@ -1,6 +1,7 @@
 import { Box, Chip, Link, Stack, Typography } from '@mui/material';
 import { ArrowUpRight } from 'lucide-react';
 import type { ResumeEntry } from './resume-data';
+import { renderMetrics } from './Metrics';
 
 interface EntryRowProps {
   entry: ResumeEntry;
@@ -81,7 +82,7 @@ export function EntryRow({ entry }: EntryRowProps) {
 
         {entry.description && (
           <Typography sx={{ fontSize: '1rem', color: 'text.secondary', mt: 1, lineHeight: 1.6 }}>
-            {entry.description}
+            {renderMetrics(entry.description)}
           </Typography>
         )}
 
@@ -174,7 +175,7 @@ export function EntryRow({ entry }: EntryRowProps) {
                     </Typography>
                     {r.description && (
                       <Typography sx={{ fontSize: '1rem', color: 'text.secondary', lineHeight: 1.6, mt: 0.75 }}>
-                        {r.description}
+                        {renderMetrics(r.description)}
                       </Typography>
                     )}
                   </Box>
@@ -200,7 +201,7 @@ export function EntryRow({ entry }: EntryRowProps) {
                   {s.label}
                 </Typography>
                 <Typography sx={{ fontSize: '1rem', color: 'text.secondary', lineHeight: 1.6 }}>
-                  {s.text}
+                  {renderMetrics(s.text)}
                 </Typography>
               </Box>
             ))}

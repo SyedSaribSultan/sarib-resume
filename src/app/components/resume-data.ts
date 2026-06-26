@@ -64,8 +64,8 @@ export const experience: ResumeEntry[] = [
     description: 'Drove design across ImagineArt and Chatly, scaling the shared design system while owning end-to-end design for AI-powered features across the visual, productivity, motion, and audio suites, with every flow built to move conversion and ROAS.',
     sections: [
       { label: 'Leadership', text: 'Took end-to-end ownership of features in the genAI space, carrying each from first concept to dev-ready handoff.' },
-      { label: 'Engineering', text: 'Built design docs for devs and used Figma MCP and Claude Code to prototype and test approaches roughly 10x faster, cutting friction out of design-to-development handoff.' },
-      { label: 'Growth & Data', text: 'Ran Mixpanel funnel analysis across 1.13M signups to pinpoint where activation broke, isolating a segment converting at 0.43% against a 1.04% baseline, then designed and shipped the fix.' },
+      { label: 'Engineering', text: 'Built design docs for devs and used Figma MCP and Claude Code to prototype and test approaches roughly **10x** faster, cutting friction out of design-to-development handoff.' },
+      { label: 'Growth & Data', text: 'Ran Mixpanel funnel analysis across **1.13M** signups to pinpoint where activation broke, isolating a segment converting at **0.43%** against a **1.04%** baseline, then designed and shipped the fix.' },
       { label: 'Socials Team', text: 'Partnered on launch campaigns for the features I designed.' },
     ],
     roles: [
@@ -79,7 +79,7 @@ export const experience: ResumeEntry[] = [
         label: 'Chatly',
         text: 'Feb 2026 — Present',
         href: 'https://chatlyai.app',
-        description: 'Owned design across the full product, from core feature surfaces to the activation and revenue flows that determine whether users stay and pay. Designed AI Images, Videos, and Music, authentication and settings, post-signup and post-purchase onboarding, custom dashboards, and native mobile experiences. Rebuilt the referral system end to end (50% off for referred users, 7,000 credits per paid upgrade) and rewrote the paywall into three A/B-tested variants.',
+        description: 'Owned design across the full product, from core feature surfaces to the activation and revenue flows that determine whether users stay and pay. Designed AI Images, Videos, and Music, authentication and settings, post-signup and post-purchase onboarding, custom dashboards, and native mobile experiences. Rebuilt the referral system end to end (**50% off** for referred users, **7,000** credits per paid upgrade) and rewrote the paywall into **three** A/B-tested variants.',
       },
       {
         label: 'ImagineArt',
