@@ -4,7 +4,6 @@ import {
   contacts,
   experience,
   skills,
-  volunteering,
   education,
   type ResumeEntry,
 } from './resume-data';
@@ -52,24 +51,24 @@ function emphasize(text: string): ReactNode {
 }
 
 // ---- shared style fragments -------------------------------------------------
-// Vertical rhythm. Generous gaps keep entries from crowding and reduce the
-// chance a page break lands awkwardly mid-section.
-const ENTRY_GAP = 26; // between top-level entries within a section
-const SECTION_GAP = 34; // between sections (Experience -> Leadership -> ...)
+// Tight vertical rhythm — keeps the doc compact (aim ~1 page) while leaving
+// enough air that page breaks don't crowd.
+const ENTRY_GAP = 9; // between top-level entries within a section
+const SECTION_GAP = 12; // between sections (Experience -> Leadership -> ...)
 
 const sectionLabel: CSSProperties = {
   gridColumn: 1,
-  fontSize: 9.5,
+  fontSize: 9,
   letterSpacing: '0.14em',
   textTransform: 'uppercase',
   color: MUTED,
   fontWeight: 400,
-  paddingTop: 2,
+  paddingTop: 1,
 };
-const company: CSSProperties = { fontSize: 12, fontWeight: 600, color: INK, lineHeight: 1.35 };
-const roleLine: CSSProperties = { fontSize: 12, color: INK, lineHeight: 1.35 };
-const periodLine: CSSProperties = { fontSize: 11, color: FAINT, lineHeight: 1.35, marginTop: 1 };
-const detail: CSSProperties = { fontSize: 11, color: MUTED, lineHeight: 1.5 };
+const company: CSSProperties = { fontSize: 11, fontWeight: 600, color: INK, lineHeight: 1.3 };
+const roleLine: CSSProperties = { fontSize: 11, color: INK, lineHeight: 1.3 };
+const periodLine: CSSProperties = { fontSize: 10, color: FAINT, lineHeight: 1.3, marginTop: 1 };
+const detail: CSSProperties = { fontSize: 10.5, color: MUTED, lineHeight: 1.34 };
 
 // One row of the 3-col grid. Section label only on the first row of a section.
 function Row({
@@ -89,8 +88,8 @@ function Row({
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: '108px 168px 1fr',
-        columnGap: 20,
+        gridTemplateColumns: '100px 184px 1fr',
+        columnGap: 18,
         paddingBottom: gap,
         breakInside: 'avoid',
       }}
@@ -106,14 +105,20 @@ function Row({
 // plus its indented sub-roles, wrapped so a page break never splits an entry
 // from its children. Sub-roles use the "sub-roles as entries" treatment.
 function EntryGroup({ e, label }: { e: ResumeEntry; label?: string }) {
-  const hasChildren = !!(e.roles && e.roles.length) || !!(e.sections && e.sections.length);
+  // For the PDF, keep only thematic sections that carry a metric (** sentinel),
+  // dropping filler lines (e.g. Leadership/Socials) to stay concise. The live
+  // site still shows all sections from the shared data.
+  const printSections = e.sections?.filter((s) => s.text.includes('**'));
+  // Likewise drop tall, metric-less descriptive sub-roles from the PDF; keep
+  // position-only sub-roles (no description — cheap history) and any whose
+  // description carries a metric.
+  const printRoles = e.roles?.filter((r) => !r.description || r.description.includes('**'));
+  const hasChildren = !!(printRoles && printRoles.length) || !!(printSections && printSections.length);
 
-  // Fold thematic sections (Leadership/Engineering/Growth & Data/...) into the
-  // top entry's detail so their metrics survive without extra nesting depth.
-  const sectionDetail = e.sections ? (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+  const sectionDetail = printSections && printSections.length ? (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       {e.description && <div style={detail}>{emphasize(e.description)}</div>}
-      {e.sections.map((s) => (
+      {printSections.map((s) => (
         <div key={s.label} style={detail}>
           <span style={{ fontWeight: 600, color: INK }}>{s.label}. </span>
           {emphasize(s.text)}
@@ -140,10 +145,10 @@ function EntryGroup({ e, label }: { e: ResumeEntry; label?: string }) {
         }
         detail={sectionDetail}
       />
-      {e.roles?.map((r, idx) => (
+      {printRoles?.map((r, idx) => (
         <Row
           key={`${e.id}-${r.label}`}
-          gap={idx === e.roles!.length - 1 ? 0 : 8}
+          gap={idx === printRoles.length - 1 ? 0 : 8}
           indent
           mid={
             <>
@@ -165,8 +170,8 @@ export function PrintResume() {
         background: PAGE,
         color: INK,
         fontFamily: SANS,
-        width: '8.5in',
-        margin: '0 auto',
+        width: '100%',
+        margin: 0,
         // Horizontal gutters only — vertical breathing room comes from the
         // @page top/bottom margins so it applies on every page-break edge too.
         padding: '0 0.7in',
@@ -180,7 +185,7 @@ export function PrintResume() {
           display: 'grid',
           gridTemplateColumns: '1fr auto',
           alignItems: 'start',
-          marginBottom: 34,
+          marginBottom: 16,
         }}
       >
         <div>
@@ -210,25 +215,8 @@ export function PrintResume() {
         ))}
       </section>
 
-      {/* Leadership (volunteering) — no nested roles. */}
-      <section style={{ paddingBottom: SECTION_GAP }}>
-        {volunteering.map((e, i) => (
-          <div key={e.id} style={{ breakInside: 'avoid', paddingBottom: ENTRY_GAP }}>
-            <Row
-              label={i === 0 ? 'Leadership' : undefined}
-              gap={0}
-              mid={
-                <>
-                  <div style={company}>{e.title}</div>
-                  {e.subtitle && <div style={roleLine}>{e.subtitle}</div>}
-                  <div style={periodLine}>{e.period}</div>
-                </>
-              }
-              detail={e.description ? <div style={detail}>{emphasize(e.description)}</div> : null}
-            />
-          </div>
-        ))}
-      </section>
+      {/* Volunteering is intentionally omitted from the PDF to keep it to one
+          page — it remains on the live site (App.tsx). */}
 
       {/* Education */}
       <section style={{ paddingBottom: SECTION_GAP }}>
@@ -251,19 +239,25 @@ export function PrintResume() {
         ))}
       </section>
 
-      {/* Skills — each row is its own unbreakable unit (no avoid on the whole
-          block, which would force a large gap if it can't fit). */}
-      <section>
-        {skills.map((s, i) => (
-          <div key={s.id} style={{ breakInside: 'avoid', paddingBottom: 12 }}>
-            <Row
-              label={i === 0 ? 'Skills' : undefined}
-              gap={0}
-              mid={<div style={{ ...company, fontSize: 11 }}>{s.label}</div>}
-              detail={<div style={detail}>{s.value}</div>}
-            />
+      {/* Skills — compact: label inline with its value on one flowing line per
+          group, packed into the detail column to save vertical space. */}
+      <section style={{ breakInside: 'avoid' }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '100px 1fr',
+            columnGap: 18,
+          }}
+        >
+          <div style={sectionLabel}>Skills</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            {skills.map((s) => (
+              <div key={s.id} style={detail}>
+                <span style={{ fontWeight: 600, color: INK }}>{s.label}.</span> {s.value}
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </section>
     </div>
   );

@@ -61,11 +61,11 @@ export const experience: ResumeEntry[] = [
     subtitle: 'Vyro',
     href: 'https://imagine.art',
     meta: 'On-site, Islamabad, PK',
-    description: 'Drove design across ImagineArt and Chatly, scaling the shared design system while owning end-to-end design for AI-powered features across the visual, productivity, motion, and audio suites, with every flow built to move conversion and ROAS.',
+    description: 'Drove design across ImagineArt and Chatly, scaling the shared design system and owning AI features end to end, with every flow built to move conversion and ROAS.',
     sections: [
-      { label: 'Leadership', text: 'Took end-to-end ownership of features in the genAI space, carrying each from first concept to dev-ready handoff.' },
-      { label: 'Engineering', text: 'Built design docs for devs and used Figma MCP and Claude Code to prototype and test approaches roughly **10x** faster, cutting friction out of design-to-development handoff.' },
-      { label: 'Growth & Data', text: 'Ran Mixpanel funnel analysis across **1.13M** signups to pinpoint where activation broke, isolating a segment converting at **0.43%** against a **1.04%** baseline, then designed and shipped the fix.' },
+      { label: 'Leadership', text: 'Owned genAI features end to end, concept to dev-ready handoff.' },
+      { label: 'Engineering', text: 'Used Figma MCP and Claude Code to prototype and test roughly **10x** faster, cutting design-to-dev handoff friction.' },
+      { label: 'Growth & Data', text: 'Ran Mixpanel funnel analysis across **1.13M** signups, isolated a segment converting at **0.43%** vs a **1.04%** baseline, then shipped the fix.' },
       { label: 'Socials Team', text: 'Partnered on launch campaigns for the features I designed.' },
     ],
     roles: [
@@ -73,19 +73,19 @@ export const experience: ResumeEntry[] = [
         label: 'Chatly + ImagineArt',
         text: 'Present',
         href: 'https://chatlyai.app',
-        description: "Led end-to-end design for Sites, Chatly's AI web app builder, in partnership with ImagineArt, owning the full journey from custom authentication and growth loops to landing pages and dashboards. Generated production visuals with AI and built Figma MCP and Claude Code prototypes that cut friction out of dev handoff.",
+        description: "Led end-to-end design for Sites, Chatly's AI web app builder, in partnership with ImagineArt — from custom auth and growth loops to landing pages and dashboards, with AI-generated visuals and Figma MCP / Claude Code prototypes that cut dev-handoff friction.",
       },
       {
         label: 'Chatly',
         text: 'Feb 2026 — Present',
         href: 'https://chatlyai.app',
-        description: 'Owned design across the full product, from core feature surfaces to the activation and revenue flows that determine whether users stay and pay. Designed AI Images, Videos, and Music, authentication and settings, post-signup and post-purchase onboarding, custom dashboards, and native mobile experiences. Rebuilt the referral system end to end (**50% off** for referred users, **7,000** credits per paid upgrade) and rewrote the paywall into **three** A/B-tested variants.',
+        description: 'Owned design across the full product — AI Images, Videos and Music, auth and settings, onboarding, dashboards, and native mobile. Rebuilt the referral system end to end (**50% off** referred, **7,000** credits per upgrade) and rewrote the paywall into **three** A/B-tested variants.',
       },
       {
         label: 'ImagineArt',
         text: '2025 — Feb 2026',
         href: 'https://imagine.art',
-        description: 'Shipped end-to-end design for four core products, the Imagine Apps Suite, Assets, AI Avatar Studio, and AI Video Studio, plus the Workflows surface, carrying each from first concept to dev-ready handoff.',
+        description: 'Shipped end-to-end design for four core products — Imagine Apps Suite, Assets, AI Avatar Studio, AI Video Studio — plus the Workflows surface, concept to dev-ready handoff.',
       },
     ],
   },
@@ -96,7 +96,7 @@ export const experience: ResumeEntry[] = [
     subtitle: 'sxtudios',
     href: 'https://linktr.ee/sxtudios',
     meta: 'Islamabad, PK',
-    description: 'Run an independent studio delivering product design and brand work for early-stage clients end to end, prototyping in code to compress concept-to-ship timelines.',
+    description: 'Independent studio delivering product design and brand work for early-stage clients, prototyping in code to compress concept-to-ship timelines.',
   },
   {
     id: 'parhlai',
@@ -105,7 +105,7 @@ export const experience: ResumeEntry[] = [
     subtitle: 'Parhlai',
     href: 'https://parhlai.com',
     meta: 'Islamabad, PK',
-    description: 'Drove product design, marketing, and growth for an ed-tech platform, scaling from digital marketing into a growth-consulting remit that owns acquisition and retention.',
+    description: 'Drove product design, marketing, and growth for an ed-tech platform, scaling from digital marketing into a growth-consulting remit owning acquisition and retention.',
     roles: [
       {
         label: 'Growth Consultant',
@@ -128,7 +128,7 @@ export const experience: ResumeEntry[] = [
     subtitle: 'NorenzTech',
     href: 'https://www.norenztech.com/',
     meta: 'Rawalpindi, PK',
-    description: "Owned both interface design and the front-end build for the company's products end to end, designing in Figma and shipping in code.",
+    description: "Owned both interface design and the front-end build for the company's products — designing in Figma, shipping in code.",
   },
   {
     id: 'easytect',
