@@ -13,6 +13,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { Section } from './components/Section';
 import { EntryRow } from './components/EntryRow';
 import { ThemeToggle } from './components/ThemeToggle';
+import { DownloadButton } from './components/DownloadButton';
 import { CustomCursor } from './components/CustomCursor';
 import { AppThemeProvider } from './components/AppThemeProvider';
 import { profile, contacts, experience, skills, volunteering, education } from './components/resume-data';
@@ -78,6 +79,7 @@ export default function App() {
     <AppThemeProvider theme={theme}>
       <CssBaseline />
       <CustomCursor />
+      <DownloadButton />
       <ThemeToggle
         mode={mode}
         onToggle={() => {
