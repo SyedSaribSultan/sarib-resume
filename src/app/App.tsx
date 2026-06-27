@@ -15,6 +15,7 @@ import { EntryRow } from './components/EntryRow';
 import { ThemeToggle } from './components/ThemeToggle';
 import { DownloadButton } from './components/DownloadButton';
 import { CustomCursor } from './components/CustomCursor';
+import { useUiSounds } from './components/useUiSounds';
 import { AppThemeProvider } from './components/AppThemeProvider';
 import { profile, contacts, experience, skills, volunteering, education } from './components/resume-data';
 import profilePhoto from '../imports/Syed_Sarib_Sultan.jpg';
@@ -56,6 +57,9 @@ export default function App() {
   });
   // Stored choice overrides system; once set it persists across reloads.
   const [userOverride, setUserOverride] = useState(() => getStoredMode() !== null);
+
+  // Subtle clicky hover/click sounds (synthesised, reduced-motion aware).
+  useUiSounds();
 
   useEffect(() => {
     if (userOverride) return;
