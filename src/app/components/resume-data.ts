@@ -90,7 +90,7 @@ export const experience: ResumeEntry[] = [
     roles: [
       {
         label: 'Chatly + ImagineArt',
-        text: '2026',
+        text: 'May 2026 — Jun 2026',
         href: 'https://chatlyai.app',
         description: "Led end-to-end design for Sites, Chatly's AI web app builder, in partnership with ImagineArt — from custom auth and growth loops to landing pages and dashboards, with AI-generated visuals and Figma MCP / Claude Code prototypes that cut dev-handoff friction.",
       },
