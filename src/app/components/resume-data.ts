@@ -67,7 +67,7 @@ export const experience: ResumeEntry[] = [
   {
     id: 'heyoz',
     period: 'Jun 2026 — Present',
-    title: 'Product Design & Growth + Engineering',
+    title: 'Senior Product Design Engineer',
     subtitle: 'HeyOz',
     href: 'https://heyoz.com',
     meta: 'US · Remote',
