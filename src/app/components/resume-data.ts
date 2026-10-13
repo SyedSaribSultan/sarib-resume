@@ -44,7 +44,7 @@ export const profile = {
   site: 'syedsarib.com',
   siteHref: 'https://syedsarib.com',
   about:
-    'Product designer who owns the work end to end and ties it to the numbers it moves. I cover the whole craft, from research and UX to interface, interaction, and design systems, and on consumer AI products, now at HeyOz and before that at ImagineArt and Chatly, that runs into onboarding, pricing, and growth too, with every flow built to move conversion and ROAS. With a Computer Science background, I prototype in code and use Figma MCP and Claude Code to hand engineers a spec they can build from.',
+    'Product designer who owns the work end to end and ties it to the numbers it moves. I cover the whole craft, from research and UX to interface, interaction, and design systems, and on consumer AI products, now at HeyOz and before that at ImagineArt and ImagineComputer (formerly Chatly), that runs into onboarding, pricing, and growth too, with every flow built to move conversion and ROAS. With a Computer Science background, I prototype in code and use Figma MCP and Claude Code to hand engineers a spec they can build from.',
 };
 
 // Search-engine topics for the JSON-LD `knowsAbout` field (not shown on the page).
@@ -80,7 +80,7 @@ export const experience: ResumeEntry[] = [
     subtitle: 'Vyro',
     href: 'https://imagine.art',
     meta: 'On-site, Islamabad, PK',
-    description: 'Drove design across ImagineArt and Chatly, scaling the shared design system and owning AI features end to end, with every flow built to move conversion and ROAS.',
+    description: 'Drove design across ImagineArt and ImagineComputer, scaling the shared design system and owning AI features end to end, with every flow built to move conversion and ROAS.',
     sections: [
       { label: 'Leadership', text: 'Owned genAI features end to end, concept to dev-ready handoff.' },
       { label: 'Engineering', text: 'Used Figma MCP and Claude Code to prototype and test roughly **10x** faster, cutting design-to-dev handoff friction.' },
@@ -89,13 +89,13 @@ export const experience: ResumeEntry[] = [
     ],
     roles: [
       {
-        label: 'Chatly + ImagineArt',
+        label: 'ImagineComputer + ImagineArt',
         text: 'May 2026 — Jun 2026',
         href: 'https://chatlyai.app',
-        description: "Led end-to-end design for Sites, Chatly's AI web app builder, in partnership with ImagineArt — from custom auth and growth loops to landing pages and dashboards, with AI-generated visuals and Figma MCP / Claude Code prototypes that cut dev-handoff friction.",
+        description: "Led end-to-end design for Sites, ImagineComputer's AI web app builder, in partnership with ImagineArt — from custom auth and growth loops to landing pages and dashboards, with AI-generated visuals and Figma MCP / Claude Code prototypes that cut dev-handoff friction.",
       },
       {
-        label: 'Chatly',
+        label: 'ImagineComputer (formerly Chatly)',
         text: 'Feb 2026 — Jun 2026',
         href: 'https://chatlyai.app',
         description: 'Owned design across the full product, from core surfaces to the activation and revenue flows. Rebuilt the referral system end to end (**50% off** referred, **7,000** credits per upgrade) and rewrote the paywall into **three** A/B-tested variants.',
