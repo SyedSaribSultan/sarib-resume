@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { resumeArtifacts } from './scripts/resume-artifacts';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), resumeArtifacts()],
   server: { port: 5173, open: true },
   build: {
     rollupOptions: {

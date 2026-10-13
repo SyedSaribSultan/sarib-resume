@@ -47,6 +47,16 @@ export const profile = {
     'Product designer who owns the work end to end and ties it to the numbers it moves. I cover the whole craft, from research and UX to interface, interaction, and design systems, and on consumer AI products, now at HeyOz and before that at ImagineArt and Chatly, that runs into onboarding, pricing, and growth too, with every flow built to move conversion and ROAS. With a Computer Science background, I prototype in code and use Figma MCP and Claude Code to hand engineers a spec they can build from.',
 };
 
+// Search-engine topics for the JSON-LD `knowsAbout` field (not shown on the page).
+export const topics = [
+  'Product Design',
+  'UX Design',
+  'Design Systems',
+  'Growth Design',
+  'AI Product Design',
+  'Conversion Optimization',
+];
+
 export const contacts: LabeledLink[] = [
   { id: 'email', label: 'Email', value: 'sadakhan2002@gmail.com', href: 'mailto:sadakhan2002@gmail.com' },
   { id: 'linkedin', label: 'LinkedIn', value: 'in/syedsaribsultanyac270', href: 'https://linkedin.com/in/syedsaribsultanyac270' },

@@ -6,7 +6,7 @@
     <title>Sarib's CV</title>
     <meta
       name="description"
-      content="Syed Sarib Sultan — Product Designer in Islamabad. Product design, growth, and engineering at HeyOz. Before that, consumer AI products at ImagineArt and Chatly."
+      content="%RESUME_DESCRIPTION%"
     />
     <meta name="author" content="Syed Sarib Sultan" />
     <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
@@ -23,7 +23,7 @@
     <meta property="og:title" content="Syed Sarib Sultan — Product Designer" />
     <meta
       property="og:description"
-      content="Product design, growth, and engineering at HeyOz. Before that, consumer AI products at ImagineArt and Chatly."
+      content="%RESUME_SHORT_DESCRIPTION%"
     />
     <meta property="og:url" content="https://resume.syedsarib.com" />
     <meta property="og:image" content="https://resume.syedsarib.com/og.png" />
@@ -36,45 +36,16 @@
     <meta name="twitter:title" content="Syed Sarib Sultan — Product Designer" />
     <meta
       name="twitter:description"
-      content="Product design, growth, and engineering at HeyOz. Before that, consumer AI products at ImagineArt and Chatly."
+      content="%RESUME_SHORT_DESCRIPTION%"
     />
     <meta name="twitter:image" content="https://resume.syedsarib.com/og.png" />
 
     <link rel="canonical" href="https://resume.syedsarib.com" />
 
-    <!-- Structured data: lets search engines and AI crawlers read who this is,
-         the current role/employer, and verified social profiles. -->
+    <!-- Structured data (Person). Generated from resume-data.ts by
+         scripts/resume-artifacts.ts, like the descriptions above. -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Syed Sarib Sultan",
-        "alternateName": "Sarib",
-        "url": "https://resume.syedsarib.com",
-        "image": "https://resume.syedsarib.com/og.png",
-        "jobTitle": "Product Designer",
-        "description": "Product Designer focused on end-to-end product design, growth, and engineering on consumer AI products, now at HeyOz and before that at ImagineArt and Chatly.",
-        "worksFor": { "@type": "Organization", "name": "HeyOz", "url": "https://heyoz.com" },
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Islamabad",
-          "addressCountry": "PK"
-        },
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "National University of Sciences and Technology (NUST)"
-        },
-        "knowsAbout": [
-          "Product Design",
-          "UX Design",
-          "Design Systems",
-          "Growth Design",
-          "AI Product Design",
-          "Conversion Optimization"
-        ],
-        "email": "mailto:sadakhan2002@gmail.com",
-        "sameAs": ["https://linkedin.com/in/syedsaribsultanyac270"]
-      }
+%RESUME_JSONLD%
     </script>
 
     <!-- Pre-paint theme: set the page background before React mounts so dark-mode
