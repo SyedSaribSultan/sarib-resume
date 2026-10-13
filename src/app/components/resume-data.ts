@@ -58,7 +58,7 @@ export const topics = [
 ];
 
 export const contacts: LabeledLink[] = [
-  { id: 'email', label: 'Email', value: 'sadakhan2002@gmail.com', href: 'mailto:sadakhan2002@gmail.com' },
+  { id: 'email', label: 'Email', value: 'syedsaribsultan@gmail.com', href: 'mailto:syedsaribsultan@gmail.com' },
   { id: 'linkedin', label: 'LinkedIn', value: 'in/syedsaribsultanyac270', href: 'https://linkedin.com/in/syedsaribsultanyac270' },
   { id: 'phone', label: 'Phone', value: '+92 333 5788859', href: 'tel:+923335788859' },
 ];
