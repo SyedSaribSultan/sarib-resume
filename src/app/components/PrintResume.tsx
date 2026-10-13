@@ -53,8 +53,8 @@ function emphasize(text: string): ReactNode {
 // ---- shared style fragments -------------------------------------------------
 // Tight vertical rhythm — keeps the doc compact (aim ~1 page) while leaving
 // enough air that page breaks don't crowd.
-const ENTRY_GAP = 14; // between top-level entries within a section
-const SECTION_GAP = 28; // between sections (Experience -> Education -> Skills)
+const ENTRY_GAP = 11; // between top-level entries within a section
+const SECTION_GAP = 20; // between sections (Experience -> Education -> Skills)
 
 const sectionLabel: CSSProperties = {
   gridColumn: 1,

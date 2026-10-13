@@ -44,7 +44,7 @@ export const profile = {
   site: 'syedsarib.com',
   siteHref: 'https://syedsarib.com',
   about:
-    'Product designer who owns the work end to end and ties it to the numbers it moves. I cover the whole craft, from research and UX to interface, interaction, and design systems, and on consumer AI products at ImagineArt and Chatly that runs into onboarding, pricing, and growth too, with every flow built to move conversion and ROAS. With a Computer Science background, I prototype in code and use Figma MCP and Claude Code to hand engineers a spec they can build from.',
+    'Product designer who owns the work end to end and ties it to the numbers it moves. I cover the whole craft, from research and UX to interface, interaction, and design systems, and on consumer AI products, now at HeyOz and before that at ImagineArt and Chatly, that runs into onboarding, pricing, and growth too, with every flow built to move conversion and ROAS. With a Computer Science background, I prototype in code and use Figma MCP and Claude Code to hand engineers a spec they can build from.',
 };
 
 export const contacts: LabeledLink[] = [
@@ -55,8 +55,16 @@ export const contacts: LabeledLink[] = [
 
 export const experience: ResumeEntry[] = [
   {
+    id: 'heyoz',
+    period: 'Jun 2026 — Present',
+    title: 'Product Design & Growth + Engineering',
+    subtitle: 'HeyOz',
+    href: 'https://heyoz.com',
+    description: 'Product design, growth, and engineering at HeyOz, an AI ad-creative platform for DTC brands and agencies.',
+  },
+  {
     id: 'vyro',
-    period: '2025 — Present',
+    period: '2025 — Jun 2026',
     title: 'Product Design & Growth',
     subtitle: 'Vyro',
     href: 'https://imagine.art',
@@ -71,13 +79,13 @@ export const experience: ResumeEntry[] = [
     roles: [
       {
         label: 'Chatly + ImagineArt',
-        text: 'Present',
+        text: '2026',
         href: 'https://chatlyai.app',
         description: "Led end-to-end design for Sites, Chatly's AI web app builder, in partnership with ImagineArt — from custom auth and growth loops to landing pages and dashboards, with AI-generated visuals and Figma MCP / Claude Code prototypes that cut dev-handoff friction.",
       },
       {
         label: 'Chatly',
-        text: 'Feb 2026 — Present',
+        text: 'Feb 2026 — Jun 2026',
         href: 'https://chatlyai.app',
         description: 'Owned design across the full product, from core surfaces to the activation and revenue flows. Rebuilt the referral system end to end (**50% off** referred, **7,000** credits per upgrade) and rewrote the paywall into **three** A/B-tested variants.',
       },
@@ -91,7 +99,7 @@ export const experience: ResumeEntry[] = [
   },
   {
     id: 'sxtudios',
-    period: '2025 — Present',
+    period: '2025 — Jun 2026',
     title: 'Founder',
     subtitle: 'sxtudios',
     href: 'https://linktr.ee/sxtudios',
@@ -100,7 +108,7 @@ export const experience: ResumeEntry[] = [
   },
   {
     id: 'parhlai',
-    period: '2025 — Present',
+    period: '2025 — Jun 2026',
     title: 'Product Design, Marketing & Growth',
     subtitle: 'Parhlai',
     href: 'https://parhlai.com',
@@ -109,7 +117,7 @@ export const experience: ResumeEntry[] = [
     roles: [
       {
         label: 'Growth Consultant',
-        text: 'Jan 2026 — Present',
+        text: 'Jan 2026 — Jun 2026',
       },
       {
         label: 'Head of Marketing',
