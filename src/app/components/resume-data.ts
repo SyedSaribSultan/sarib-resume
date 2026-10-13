@@ -41,8 +41,8 @@ export const profile = {
   name: 'Syed Sarib Sultan',
   title: 'Product Designer',
   location: 'Islamabad, PK',
-  site: 'syedsaribsultan.vercel.app',
-  siteHref: 'https://syedsaribsultan.vercel.app',
+  site: 'syedsarib.com',
+  siteHref: 'https://syedsarib.com',
   about:
     'Product designer who owns the work end to end and ties it to the numbers it moves. I cover the whole craft, from research and UX to interface, interaction, and design systems, and on consumer AI products at ImagineArt and Chatly that runs into onboarding, pricing, and growth too, with every flow built to move conversion and ROAS. With a Computer Science background, I prototype in code and use Figma MCP and Claude Code to hand engineers a spec they can build from.',
 };

@@ -1,7 +1,7 @@
 # Sarib's CV
 
 Personal resume site for **Syed Sarib Sultan** — a single-page, static, dark/light
-themed CV. Live at **https://sarib-resume.vercel.app**.
+themed CV. Live at **https://resume.syedsarib.com**.
 
 ---
 
@@ -124,8 +124,10 @@ All config is in [`vercel.json`](vercel.json):
 - Security headers: CSP, `X-Frame-Options: DENY`, `X-Content-Type-Options`,
   `Referrer-Policy`, `Permissions-Policy`
 
-> **Domain note:** absolute URLs (OG image, canonical, JSON-LD, sitemap, robots,
-> llms.txt) are hardcoded to `https://sarib-resume.vercel.app`. If the domain
+> **Domain note:** the old `sarib-resume.vercel.app` 301-redirects here (see `redirects` in `vercel.json`).
+>
+> Also: absolute URLs (OG image, canonical, JSON-LD, sitemap, robots,
+> llms.txt) are hardcoded to `https://resume.syedsarib.com`. If the domain
 > changes, update those references across `index.html` and `public/`.
 
 ---
