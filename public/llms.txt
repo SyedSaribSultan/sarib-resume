@@ -7,7 +7,7 @@
 - LinkedIn: https://linkedin.com/in/syedsaribsultanyac270
 - Site: https://resume.syedsarib.com
 
-## Current role — Product Design & Growth + Engineering, HeyOz (Jun 2026 — Present)
+## Current role — Product Design & Growth + Engineering, HeyOz (Jun 2026 — Present, US-based, remote)
 Product design, growth, and engineering at HeyOz, an AI ad-creative platform for DTC brands and agencies. (https://heyoz.com)
 
 ## Previous role — Product Design & Growth, Vyro (2025 — Jun 2026, Islamabad, on-site)
@@ -32,4 +32,4 @@ Drove design across ImagineArt and Chatly, scaling the shared design system whil
 - Tools: Figma, Mixpanel, GrowthBook, Notion, AI image/video models (Kling, Seedance, Veo, Nano Banana, fal API)
 
 ## Education
-- BS, Computer Science — National University of Sciences and Technology (NUST), Islamabad (2022 — 2026)
+- BS, Computer Science — National University of Sciences and Technology (NUST), Islamabad (2022 — Jun 2026, graduated)

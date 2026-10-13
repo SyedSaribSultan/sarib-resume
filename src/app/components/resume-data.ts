@@ -60,6 +60,7 @@ export const experience: ResumeEntry[] = [
     title: 'Product Design & Growth + Engineering',
     subtitle: 'HeyOz',
     href: 'https://heyoz.com',
+    meta: 'US · Remote',
     description: 'Product design, growth, and engineering at HeyOz, an AI ad-creative platform for DTC brands and agencies.',
   },
   {
@@ -188,7 +189,7 @@ export const skills: SkillGroup[] = [
 export const volunteering: ResumeEntry[] = [
   {
     id: 'project-elevate',
-    period: '2023 — Present',
+    period: '2023 — Jun 2026',
     title: 'Project Elevate',
     subtitle: 'Head · NUST Community Service Club',
     href: 'https://linkedin.com/in/syedsaribsultanyac270',
@@ -196,7 +197,7 @@ export const volunteering: ResumeEntry[] = [
   },
   {
     id: 'blood-drive',
-    period: '2023 — Present',
+    period: '2023 — Jun 2026',
     title: 'Blood Donation Drives',
     subtitle: 'Volunteer · NUST Community Service Club',
     href: 'https://linkedin.com/in/syedsaribsultanyac270',
@@ -204,7 +205,7 @@ export const volunteering: ResumeEntry[] = [
   },
   {
     id: 'orphans-know-more',
-    period: '2022 — Present',
+    period: '2022 — Jun 2026',
     title: 'Project Orphans Know More',
     subtitle: 'Volunteer · NUST Community Service Club',
     href: 'https://linkedin.com/in/syedsaribsultanyac270',
@@ -215,7 +216,7 @@ export const volunteering: ResumeEntry[] = [
 export const education: ResumeEntry[] = [
   {
     id: 'nust',
-    period: '2022 — 2026',
+    period: '2022 — Jun 2026',
     title: 'BS, Computer Science',
     subtitle: 'National University of Sciences and Technology (NUST)',
     href: 'https://linkedin.com/in/syedsaribsultanyac270',
