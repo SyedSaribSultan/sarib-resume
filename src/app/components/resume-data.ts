@@ -91,13 +91,13 @@ export const experience: ResumeEntry[] = [
       {
         label: 'ImagineComputer + ImagineArt',
         text: 'May 2026 — Jun 2026',
-        href: 'https://chatlyai.app',
+        href: 'https://www.imagine.art/computer/startup',
         description: "Led end-to-end design for Sites, ImagineComputer's AI web app builder, in partnership with ImagineArt — from custom auth and growth loops to landing pages and dashboards, with AI-generated visuals and Figma MCP / Claude Code prototypes that cut dev-handoff friction.",
       },
       {
         label: 'ImagineComputer (formerly Chatly)',
         text: 'Feb 2026 — Jun 2026',
-        href: 'https://chatlyai.app',
+        href: 'https://www.imagine.art/computer/agent',
         description: 'Owned design across the full product, from core surfaces to the activation and revenue flows. Rebuilt the referral system end to end (**50% off** referred, **7,000** credits per upgrade) and rewrote the paywall into **three** A/B-tested variants.',
       },
       {
