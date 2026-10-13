@@ -75,7 +75,7 @@ export const experience: ResumeEntry[] = [
   },
   {
     id: 'vyro',
-    period: '2025 — Jun 2026',
+    period: 'Dec 2025 — Jun 2026',
     title: 'Product Design & Growth',
     subtitle: 'Vyro',
     href: 'https://imagine.art',
@@ -102,7 +102,7 @@ export const experience: ResumeEntry[] = [
       },
       {
         label: 'ImagineArt',
-        text: '2025 — Feb 2026',
+        text: 'Dec 2025 — Feb 2026',
         href: 'https://imagine.art',
         description: 'Shipped end-to-end design for four core products — Imagine Apps Suite, Assets, AI Avatar Studio, AI Video Studio — plus the Workflows surface, concept to dev-ready handoff.',
       },
