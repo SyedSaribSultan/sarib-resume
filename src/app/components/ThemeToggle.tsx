@@ -26,10 +26,10 @@ export function ThemeToggle({ mode, onToggle }: ThemeToggleProps) {
         zIndex: 'tooltip',
         width: 38,
         height: 38,
-        color: 'text.secondary',
-        opacity: 0.55,
-        transition: 'opacity 200ms ease, color 200ms ease, transform 200ms ease',
-        '&:hover': { opacity: 1, color: 'text.primary', bgcolor: 'transparent', transform: 'scale(1.08)' },
+        // Muted via a colour token (not opacity) so the icon keeps >= 4.5:1.
+        color: 'text.disabled',
+        transition: 'color 200ms ease, transform 200ms ease',
+        '&:hover': { color: 'text.primary', bgcolor: 'transparent', transform: 'scale(1.08)' },
         '&:active': { transform: 'scale(0.92)' },
       }}
     >

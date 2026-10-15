@@ -66,19 +66,17 @@ export function DownloadButton() {
         fontWeight: 500,
         lineHeight: 1,
         borderRadius: 999,
-        color: 'text.secondary',
+        // Muted via a colour token (not opacity) so the label keeps >= 4.5:1.
+        color: 'text.disabled',
         borderColor: 'divider',
-        opacity: 0.55,
-        transition: 'opacity 200ms ease, color 200ms ease, border-color 200ms ease',
+        transition: 'color 200ms ease, border-color 200ms ease',
         '&:hover': {
-          opacity: 1,
           color: 'text.primary',
           borderColor: 'text.disabled',
           bgcolor: 'transparent',
         },
         // Keep the loading/done states legible instead of MUI's greyed-out look.
         '&.Mui-disabled': {
-          opacity: 1,
           color: 'text.primary',
           borderColor: 'divider',
         },
