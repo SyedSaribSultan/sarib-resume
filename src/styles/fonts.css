@@ -11,6 +11,21 @@
     background: #ffffff !important;
     margin: 0 !important;
     padding: 0 !important;
+    color: #1c1c1a !important;
+  }
+  /* Dark mode on screen must still print dark-on-white: re-point the dark
+     scheme's MUI colour variables at the light palette. */
+  html[data-theme='dark'] {
+    color-scheme: light !important;
+    --mui-palette-text-primary: #1c1c1a !important;
+    --mui-palette-text-secondary: #6f6f68 !important;
+    --mui-palette-text-disabled: #6e6e66 !important;
+    --mui-palette-text-primaryChannel: 28 28 26 !important;
+    --mui-palette-text-secondaryChannel: 111 111 104 !important;
+    --mui-palette-divider: rgba(0, 0, 0, 0.08) !important;
+    --mui-palette-dividerChannel: 0 0 0 !important;
+    --mui-palette-background-default: #ffffff !important;
+    --mui-palette-background-paper: #ffffff !important;
   }
   /* Comfortable top/bottom margins on EVERY page (incl. page-break edges) so
      content never jams against the cut line. Left/right stay 0 so the page
