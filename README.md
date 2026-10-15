@@ -48,7 +48,7 @@ from a single TypeScript file.
 │   │   ├── fonts.css               # @font-face for Google Sans Flex
 │   │   └── *.woff2                 # The font files
 │   └── imports/
-│       └── Syed_Sarib_Sultan.jpg   # Profile photo (EXIF-stripped, 384px)
+│       └── Syed_Sarib_Sultan.jpg   # Profile photo (EXIF-stripped, 192×256)
 ├── vercel.json               # Framework, build, cache + security headers
 ├── vite.config.ts            # Plugins + manual vendor chunk splitting
 └── tsconfig.json
@@ -102,7 +102,7 @@ npm run dev        # http://localhost:5173
 ## Build
 
 ```bash
-npm run build      # tsc -b && vite build  ->  dist/
+npm run build      # tsc -b && vite build, prerender index.html, render resume.pdf  ->  dist/
 npm run preview    # serve the production build locally
 ```
 
@@ -124,7 +124,7 @@ Requires **Node 20+** (pinned via `engines` in `package.json`).
 ## Assets & images
 
 - The profile photo is **EXIF-stripped** (GPS/device metadata removed) and resized
-  to 384px before commit — it displays at 96px. Keep it small; Vite hashes and
+  to 192×256 (2× its 96px display size) before commit. Keep it small; Vite hashes and
   emits it into `dist/assets/`.
 - Favicon, apple-touch-icon, and the OG image live in `public/` (NOT `dist/` —
   `dist/` is wiped and rebuilt on every Vercel deploy).
@@ -137,9 +137,10 @@ Connected to this GitHub repo. **Every push to `main` triggers a production buil
 All config is in [`vercel.json`](vercel.json):
 
 - Framework `vite`, build `npm run build`, output `dist`
-- SPA rewrite that excludes `/assets/`
+- No rewrites: `index.html` is served at `/`, unknown paths 404
 - `Cache-Control: immutable` (1 year) on hashed `/assets/*`
-- Security headers: CSP, `X-Frame-Options: DENY`, `X-Content-Type-Options`,
+- Security headers: CSP (inline theme script allowed by `sha256` hash — the build
+  fails if `index.html`'s inline script changes without updating it), `X-Frame-Options: DENY`, `X-Content-Type-Options`,
   `Referrer-Policy`, `Permissions-Policy`
 
 > **Domain note:** the old `sarib-resume.vercel.app` 301-redirects here (see `redirects` in `vercel.json`).

@@ -7,7 +7,13 @@
  *   /llms.txt     plain-text profile for LLM crawlers
  *
  * resume.pdf is rendered after the build by scripts/render-pdf.mjs.
+ *
+ * At build time it also preloads the main (latin) font and fails the build if
+ * an inline <script> in index.html is not allowed by a sha256 hash in
+ * vercel.json's Content-Security-Policy (which has no 'unsafe-inline').
  */
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import type { Plugin } from 'vite';
 import {
   contacts,
@@ -120,15 +126,49 @@ export function llmsTxt(): string {
   ].join('\n');
 }
 
+function transformHtml(html: string): string {
+  const s = summaries();
+  return html
+    .replaceAll('%RESUME_DESCRIPTION%', escapeAttr(s.long))
+    .replaceAll('%RESUME_SHORT_DESCRIPTION%', escapeAttr(s.short))
+    .replace('%RESUME_JSONLD%', JSON.stringify(jsonLd(), null, 2).replace(/</g, '\u003c'));
+}
+
+/** Every inline classic <script> must have its sha256 in vercel.json's CSP. */
+function assertInlineScriptsAllowedByCsp(html: string) {
+  const vercel = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
+  const csp: string =
+    vercel.headers
+      .flatMap((h: { headers: { key: string; value: string }[] }) => h.headers)
+      .find((h: { key: string }) => h.key === 'Content-Security-Policy')?.value ?? '';
+  // Skips <script src=...> and non-JS types such as application/ld+json.
+  for (const m of html.matchAll(/<script(?![^>]*\b(?:src|type)=)[^>]*>([\s\S]*?)<\/script>/g)) {
+    const hash = `'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`;
+    if (!csp.includes(hash)) {
+      throw new Error(`Inline script not allowed by vercel.json CSP. Add ${hash} to script-src.`);
+    }
+  }
+}
+
 export function resumeArtifacts(): Plugin {
   return {
     name: 'resume-artifacts',
-    transformIndexHtml(html) {
-      const s = summaries();
-      return html
-        .replaceAll('%RESUME_DESCRIPTION%', escapeAttr(s.long))
-        .replaceAll('%RESUME_SHORT_DESCRIPTION%', escapeAttr(s.short))
-        .replace('%RESUME_JSONLD%', JSON.stringify(jsonLd(), null, 2).replace(/</g, '\\u003c'));
+    transformIndexHtml: {
+      order: 'post',
+      handler(html, ctx) {
+        if (ctx.bundle) {
+          assertInlineScriptsAllowedByCsp(html);
+          // Preload the main latin face so text doesn't wait on the CSS -> font chain.
+          const font = Object.keys(ctx.bundle).find((f) => /google-sans-flex-latin-(?!ext-)[^/]*\.woff2$/.test(f));
+          if (font) {
+            html = html.replace(
+              '</title>',
+              `</title>\n    <link rel="preload" href="/${font}" as="font" type="font/woff2" crossorigin />`,
+            );
+          }
+        }
+        return transformHtml(html);
+      },
     },
     configureServer(server) {
       // Same files in `npm run dev`.

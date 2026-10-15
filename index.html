@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sarib's CV</title>
+    <title>Syed Sarib Sultan — Resume</title>
     <meta
       name="description"
       content="%RESUME_DESCRIPTION%"
@@ -53,21 +53,11 @@
 
     <!-- Pre-paint theme: pick the colour scheme (data-theme, read by MUI's CSS
          variables) and page background before first paint, so dark-mode users
-         never see a light flash. Mirrors App.tsx palette + storage key. -->
-    <script>
-      (function () {
-        try {
-          var stored = localStorage.getItem('theme-mode');
-          var dark =
-            stored === 'dark' ||
-            (stored !== 'light' &&
-              window.matchMedia('(prefers-color-scheme: dark)').matches);
-          var html = document.documentElement;
-          html.setAttribute('data-theme', dark ? 'dark' : 'light');
-          html.style.backgroundColor = dark ? '#121211' : '#fbfbfa';
-        } catch (e) {}
-      })();
-    </script>
+         never see a light flash. Mirrors App.tsx palette + storage key.
+         Kept on ONE line: its sha256 is pinned in vercel.json's CSP (checked
+         by scripts/resume-artifacts.ts at build time), and a single line is
+         immune to CRLF/LF checkout differences. -->
+    <script>(function(){try{var s=localStorage.getItem('theme-mode');var d=s==='dark'||(s!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var h=document.documentElement;h.setAttribute('data-theme',d?'dark':'light');h.style.backgroundColor=d?'#121211':'#fbfbfa';}catch(e){}})();</script>
   </head>
   <body>
     <div id="root"></div>
