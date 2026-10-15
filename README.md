@@ -9,7 +9,7 @@ themed CV. Live at **https://resume.syedsarib.com**.
 
 | Layer    | Choice                                                            |
 | -------- | ---------------------------------------------------------------- |
-| Build    | [Vite](https://vitejs.dev) 5                                      |
+| Build    | [Vite](https://vitejs.dev) 7                                      |
 | UI       | React 18 + TypeScript                                             |
 | Styling  | [MUI](https://mui.com) (`@mui/material` v6) + Emotion (CSS-in-JS) |
 | Motion   | [`motion`](https://motion.dev) — custom cursor + theme toggle    |
