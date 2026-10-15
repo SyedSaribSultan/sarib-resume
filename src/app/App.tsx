@@ -11,6 +11,7 @@ import {
   useColorScheme,
 } from '@mui/material';
 import { ArrowUpRight } from 'lucide-react';
+import { MotionConfig } from 'motion/react';
 import { Section } from './components/Section';
 import { EntryRow } from './components/EntryRow';
 import { ThemeToggle } from './components/ThemeToggle';
@@ -60,7 +61,10 @@ export default function App() {
   return (
     <AppThemeProvider theme={theme} modeStorageKey={THEME_KEY} defaultMode="system">
       <CssBaseline />
-      <Resume />
+      {/* Honour prefers-reduced-motion for every motion animation. */}
+      <MotionConfig reducedMotion="user">
+        <Resume />
+      </MotionConfig>
     </AppThemeProvider>
   );
 }
