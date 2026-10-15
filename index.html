@@ -41,6 +41,9 @@
     <meta name="twitter:image" content="https://resume.syedsarib.com/og.png" />
 
     <link rel="canonical" href="https://resume.syedsarib.com" />
+    <link rel="alternate" type="application/pdf" href="/resume.pdf" title="Resume (PDF)" />
+    <link rel="alternate" type="application/json" href="/resume.json" title="Resume data (JSON)" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
 
     <!-- Structured data (Person). Generated from resume-data.ts by
          scripts/resume-artifacts.ts, like the descriptions above. -->
@@ -48,8 +51,9 @@
 %RESUME_JSONLD%
     </script>
 
-    <!-- Pre-paint theme: set the page background before React mounts so dark-mode
-         users don't see a light flash (FOUC). Mirrors App.tsx palette + storage key. -->
+    <!-- Pre-paint theme: pick the colour scheme (data-theme, read by MUI's CSS
+         variables) and page background before first paint, so dark-mode users
+         never see a light flash. Mirrors App.tsx palette + storage key. -->
     <script>
       (function () {
         try {
@@ -58,7 +62,9 @@
             stored === 'dark' ||
             (stored !== 'light' &&
               window.matchMedia('(prefers-color-scheme: dark)').matches);
-          document.documentElement.style.backgroundColor = dark ? '#121211' : '#fbfbfa';
+          var html = document.documentElement;
+          html.setAttribute('data-theme', dark ? 'dark' : 'light');
+          html.style.backgroundColor = dark ? '#121211' : '#fbfbfa';
         } catch (e) {}
       })();
     </script>

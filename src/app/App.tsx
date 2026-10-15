@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import {
   Avatar,
   Box,
@@ -8,13 +8,13 @@ import {
   Stack,
   Typography,
   createTheme,
+  useColorScheme,
 } from '@mui/material';
 import { ArrowUpRight } from 'lucide-react';
 import { Section } from './components/Section';
 import { EntryRow } from './components/EntryRow';
 import { ThemeToggle } from './components/ThemeToggle';
 import { DownloadButton } from './components/DownloadButton';
-import { CustomCursor } from './components/CustomCursor';
 import { useUiSounds } from './components/useUiSounds';
 import { AppThemeProvider } from './components/AppThemeProvider';
 import { profile, contacts, experience, skills, volunteering, education } from './components/resume-data';
@@ -22,7 +22,6 @@ import profilePhoto from '../imports/Syed_Sarib_Sultan.jpg';
 
 const palettes = {
   light: {
-    mode: 'light' as const,
     background: { default: '#fbfbfa', paper: '#ffffff' },
     // disabled darkened from #b7b7af -> #6e6e66 so left-column labels/periods
     // (rendered with text.disabled) clear WCAG AA 4.5:1 on the page background.
@@ -30,7 +29,6 @@ const palettes = {
     divider: 'rgba(0,0,0,0.08)',
   },
   dark: {
-    mode: 'dark' as const,
     background: { default: '#121211', paper: '#1a1a18' },
     // disabled lightened from #5b5b54 -> #8c8c83 to clear AA on dark background.
     text: { primary: '#ededea', secondary: '#9a9a91', disabled: '#8c8c83' },
@@ -38,62 +36,63 @@ const palettes = {
   },
 };
 
-const THEME_KEY = 'theme-mode';
+// Must match the pre-paint script in index.html (storage key + attribute).
+export const THEME_KEY = 'theme-mode';
 
-function getStoredMode(): 'light' | 'dark' | null {
-  if (typeof window === 'undefined') return null;
-  const v = window.localStorage.getItem(THEME_KEY);
-  return v === 'light' || v === 'dark' ? v : null;
-}
+// CSS-variable theme: both palettes ship as CSS custom properties and the
+// active one is picked by `data-theme` on <html>. The markup is identical in
+// light and dark, so the build-time prerender (src/entry-server.tsx) hydrates
+// cleanly whatever the visitor's theme is.
+const theme = createTheme({
+  cssVariables: { colorSchemeSelector: 'data-theme' },
+  colorSchemes: { light: { palette: palettes.light }, dark: { palette: palettes.dark } },
+  typography: { fontFamily: '"Google Sans Flex", sans-serif' },
+  shape: { borderRadius: 8 },
+});
+
+// The custom cursor is desktop-only, so its code (and motion's spring/drag
+// features) is fetched only when a fine pointer is present.
+const CustomCursor = lazy(() =>
+  import('./components/CustomCursor').then((m) => ({ default: m.CustomCursor })),
+);
 
 export default function App() {
-  const [mode, setMode] = useState<'light' | 'dark'>(() => {
-    const stored = getStoredMode();
-    if (stored) return stored;
-    return typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-  });
-  // Stored choice overrides system; once set it persists across reloads.
-  const [userOverride, setUserOverride] = useState(() => getStoredMode() !== null);
+  return (
+    <AppThemeProvider theme={theme} modeStorageKey={THEME_KEY} defaultMode="system">
+      <CssBaseline />
+      <Resume />
+    </AppThemeProvider>
+  );
+}
+
+function Resume() {
+  // `mode` is undefined on the server and during hydration, then resolves.
+  const { mode, systemMode, setMode } = useColorScheme();
+  const resolved = mode === 'system' ? systemMode : mode;
 
   // Subtle clicky hover/click sounds (synthesised, reduced-motion aware).
   useUiSounds();
 
+  const [finePointer, setFinePointer] = useState(false);
   useEffect(() => {
-    if (userOverride) return;
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    const onChange = (e: MediaQueryListEvent) => setMode(e.matches ? 'dark' : 'light');
+    const mq = window.matchMedia('(pointer: fine)');
+    setFinePointer(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setFinePointer(e.matches);
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
-  }, [userOverride]);
-
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: palettes[mode],
-        typography: { fontFamily: '"Google Sans Flex", sans-serif' },
-        shape: { borderRadius: 8 },
-      }),
-    [mode],
-  );
+  }, []);
 
   return (
-    <AppThemeProvider theme={theme}>
-      <CssBaseline />
-      <CustomCursor />
+    <>
+      {finePointer && (
+        <Suspense fallback={null}>
+          <CustomCursor />
+        </Suspense>
+      )}
       <DownloadButton />
       <ThemeToggle
-        mode={mode}
-        onToggle={() => {
-          setUserOverride(true);
-          setMode((m) => {
-            const next = m === 'light' ? 'dark' : 'light';
-            window.localStorage.setItem(THEME_KEY, next);
-            return next;
-          });
-        }}
+        mode={resolved}
+        onToggle={() => setMode(resolved === 'dark' ? 'light' : 'dark')}
       />
       <Box
         sx={{
@@ -233,11 +232,15 @@ export default function App() {
           </Section>
 
           {/* Footer */}
-          <Typography sx={{ mt: { xs: 6, sm: 8 }, fontSize: '1rem', color: 'text.disabled' }}>
+          {/* The year is prerendered at build time; tolerate a stale one. */}
+          <Typography
+            suppressHydrationWarning
+            sx={{ mt: { xs: 6, sm: 8 }, fontSize: '1rem', color: 'text.disabled' }}
+          >
             © {new Date().getFullYear()} {profile.name}
           </Typography>
         </Container>
       </Box>
-    </AppThemeProvider>
+    </>
   );
 }

@@ -4,6 +4,9 @@ import { ThemeProvider as MuiThemeProvider, type Theme } from '@mui/material';
 interface AppThemeProviderProps {
   theme: Theme;
   children: ReactNode;
+  /** localStorage key for the chosen mode ('light' | 'dark' | 'system'). */
+  modeStorageKey?: string;
+  defaultMode?: 'light' | 'dark' | 'system';
 }
 
 /**
@@ -14,6 +17,6 @@ interface AppThemeProviderProps {
  * injected props land on a permissive function component instead of reaching
  * MUI's ThemeProvider.
  */
-export function AppThemeProvider({ theme, children }: AppThemeProviderProps) {
-  return createElement(MuiThemeProvider, { theme }, children);
+export function AppThemeProvider({ theme, children, modeStorageKey, defaultMode }: AppThemeProviderProps) {
+  return createElement(MuiThemeProvider, { theme, modeStorageKey, defaultMode }, children);
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { GlobalStyles, useTheme } from '@mui/material';
 import { motion, useMotionValue, useSpring } from 'motion/react';
+import type {} from '@mui/material/themeCssVarsAugmentation';
 
 // Soft, sleek (non-bouncy) physics for the lagging ring.
 const RING_SPRING = { stiffness: 220, damping: 28, mass: 0.6 } as const;
@@ -28,7 +29,8 @@ function useMediaQuery(query: string, initial = false): boolean {
 
 export function CustomCursor() {
   const theme = useTheme();
-  const color = theme.palette.text.primary;
+  // CSS variable, so the cursor follows the active colour scheme.
+  const color = theme.vars?.palette.text.primary ?? theme.palette.text.primary;
 
   const finePointer = useMediaQuery('(pointer: fine)');
   const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
@@ -134,7 +136,7 @@ export function CustomCursor() {
             cy={RING_SIZE / 2}
             r={RING_SIZE / 2 - 0.5}
             fill="none"
-            stroke={color}
+            style={{ stroke: color }}
             strokeWidth={0.75}
             vectorEffect="non-scaling-stroke"
           />

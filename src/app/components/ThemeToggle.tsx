@@ -1,9 +1,10 @@
-import { IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { AnimatePresence, motion } from 'motion/react';
 import { Moon, Sun } from 'lucide-react';
 
 interface ThemeToggleProps {
-  mode: 'light' | 'dark';
+  /** Resolved mode; undefined while prerendered / hydrating. */
+  mode: 'light' | 'dark' | undefined;
   onToggle: () => void;
 }
 
@@ -13,7 +14,9 @@ export function ThemeToggle({ mode, onToggle }: ThemeToggleProps) {
   return (
     <IconButton
       onClick={onToggle}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={
+        mode === undefined ? 'Toggle color theme' : isDark ? 'Switch to light mode' : 'Switch to dark mode'
+      }
       className="print-hide"
       disableRipple
       sx={{
@@ -30,18 +33,31 @@ export function ThemeToggle({ mode, onToggle }: ThemeToggleProps) {
         '&:active': { transform: 'scale(0.92)' },
       }}
     >
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={mode}
-          initial={{ rotate: -90, scale: 0, opacity: 0 }}
-          animate={{ rotate: 0, scale: 1, opacity: 1 }}
-          exit={{ rotate: 90, scale: 0, opacity: 0 }}
-          transition={{ type: 'spring', stiffness: 320, damping: 20 }}
-          style={{ display: 'inline-flex' }}
-        >
-          {isDark ? <Moon size={18} /> : <Sun size={18} />}
-        </motion.span>
-      </AnimatePresence>
+      {mode === undefined ? (
+        // Prerendered HTML can't know the visitor's theme, so ship both icons
+        // and let the `data-theme` attribute (set before paint) pick one.
+        <>
+          <Box component="span" sx={{ display: 'inline-flex', '[data-theme="dark"] &': { display: 'none' } }}>
+            <Sun size={18} />
+          </Box>
+          <Box component="span" sx={{ display: 'none', '[data-theme="dark"] &': { display: 'inline-flex' } }}>
+            <Moon size={18} />
+          </Box>
+        </>
+      ) : (
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={mode}
+            initial={{ rotate: -90, scale: 0, opacity: 0 }}
+            animate={{ rotate: 0, scale: 1, opacity: 1 }}
+            exit={{ rotate: 90, scale: 0, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 20 }}
+            style={{ display: 'inline-flex' }}
+          >
+            {isDark ? <Moon size={18} /> : <Sun size={18} />}
+          </motion.span>
+        </AnimatePresence>
+      )}
     </IconButton>
   );
 }

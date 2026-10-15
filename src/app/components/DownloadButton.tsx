@@ -32,15 +32,9 @@ export function DownloadButton() {
   );
 
   const handleDownload = () => {
+    // A real <a href download>: the browser starts the download natively, and
+    // crawlers / no-JS visitors still get a working link to the PDF.
     if (phase !== 'idle') return;
-
-    const a = document.createElement('a');
-    a.href = RESUME_URL;
-    a.download = 'Syed-Sarib-Sultan-CV.pdf';
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
     setPhase('loading');
     loadTimer.current = setTimeout(() => {
       setPhase('done');
@@ -50,6 +44,9 @@ export function DownloadButton() {
 
   return (
     <Button
+      component="a"
+      href={RESUME_URL}
+      download="Syed-Sarib-Sultan-CV.pdf"
       onClick={handleDownload}
       disabled={phase !== 'idle'}
       disableRipple
