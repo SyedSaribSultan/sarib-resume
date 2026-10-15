@@ -8,13 +8,15 @@ export default defineConfig(({ isSsrBuild }) => ({
   build: {
     rollupOptions: {
       output: {
-        // Split the vendor graph so React, MUI/emotion, and motion are
-        // cached independently of app code across deploys.
-        manualChunks: isSsrBuild ? undefined : {
-          react: ['react', 'react-dom'],
-          mui: ['@mui/material', '@emotion/react', '@emotion/styled'],
-          motion: ['motion'],
-        },
+        // React and MUI/Emotion get their own long-lived vendor chunks. A
+        // function is needed: the object form left React (CJS) inside mui.
+        // motion is left to Rollup so its lazy features split off.
+        manualChunks: isSsrBuild
+          ? undefined
+          : (id) => {
+              if (/[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/.test(id)) return 'react';
+              if (/[\\/]node_modules[\\/](@mui|@emotion)[\\/]/.test(id)) return 'mui';
+            },
       },
     },
   },

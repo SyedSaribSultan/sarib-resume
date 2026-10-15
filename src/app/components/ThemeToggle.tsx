@@ -1,5 +1,5 @@
 import { Box, IconButton } from '@mui/material';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, m } from 'motion/react';
 import { Moon, Sun } from 'lucide-react';
 
 interface ThemeToggleProps {
@@ -46,7 +46,7 @@ export function ThemeToggle({ mode, onToggle }: ThemeToggleProps) {
         </>
       ) : (
         <AnimatePresence mode="wait" initial={false}>
-          <motion.span
+          <m.span
             key={mode}
             initial={{ rotate: -90, scale: 0, opacity: 0 }}
             animate={{ rotate: 0, scale: 1, opacity: 1 }}
@@ -55,7 +55,7 @@ export function ThemeToggle({ mode, onToggle }: ThemeToggleProps) {
             style={{ display: 'inline-flex' }}
           >
             {isDark ? <Moon size={18} /> : <Sun size={18} />}
-          </motion.span>
+          </m.span>
         </AnimatePresence>
       )}
     </IconButton>

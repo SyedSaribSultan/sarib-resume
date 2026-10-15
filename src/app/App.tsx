@@ -11,7 +11,7 @@ import {
   useColorScheme,
 } from '@mui/material';
 import { ArrowUpRight } from 'lucide-react';
-import { MotionConfig } from 'motion/react';
+import { LazyMotion, MotionConfig } from 'motion/react';
 import { Section } from './components/Section';
 import { EntryRow } from './components/EntryRow';
 import { ThemeToggle } from './components/ThemeToggle';
@@ -57,13 +57,17 @@ const CustomCursor = lazy(() =>
   import('./components/CustomCursor').then((m) => ({ default: m.CustomCursor })),
 );
 
+const loadMotionFeatures = () => import('./motion-features').then((m) => m.default);
+
 export default function App() {
   return (
     <AppThemeProvider theme={theme} modeStorageKey={THEME_KEY} defaultMode="system">
       <CssBaseline />
       {/* Honour prefers-reduced-motion for every motion animation. */}
       <MotionConfig reducedMotion="user">
-        <Resume />
+        <LazyMotion features={loadMotionFeatures}>
+          <Resume />
+        </LazyMotion>
       </MotionConfig>
     </AppThemeProvider>
   );

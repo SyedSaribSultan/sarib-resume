@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@mui/material';
-import { motion } from 'motion/react';
+import { m } from 'motion/react';
 import { Check, Download, Loader2 } from 'lucide-react';
 
 // Where the static, pre-exported resume lives (public/ is served at the root).
@@ -97,25 +97,25 @@ export function DownloadButton() {
 function PhaseIcon({ phase }: { phase: Phase }) {
   if (phase === 'loading') {
     return (
-      <motion.span
+      <m.span
         style={{ display: 'inline-flex' }}
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, ease: 'linear', duration: 0.8 }}
       >
         <Loader2 size={16} />
-      </motion.span>
+      </m.span>
     );
   }
   if (phase === 'done') {
     return (
-      <motion.span
+      <m.span
         style={{ display: 'inline-flex' }}
         initial={{ scale: 0.3, opacity: 0, rotate: -30 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
         transition={{ type: 'spring', stiffness: 380, damping: 18 }}
       >
         <Check size={16} />
-      </motion.span>
+      </m.span>
     );
   }
   return (
