@@ -110,7 +110,7 @@ function Resume() {
           transition: 'background-color 350ms ease',
         }}
       >
-        <Container maxWidth={false} sx={{ maxWidth: 768, px: { xs: 3, sm: 2 } }}>
+        <Container component="main" maxWidth={false} sx={{ maxWidth: 768, px: { xs: 3, sm: 2 } }}>
           {/* Header */}
           <Stack direction="row" spacing={2.5} sx={{ alignItems: 'center' }}>
             <Avatar

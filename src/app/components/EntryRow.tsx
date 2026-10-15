@@ -11,6 +11,9 @@ export function EntryRow({ entry }: EntryRowProps) {
   const titleNode = (
     <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center', flexWrap: 'wrap' }}>
       {entry.href ? (
+        // Entry titles are <h3>s under the section <h2>s; the flex <h3>
+        // keeps the link's box exactly as before.
+        <Typography component="h3" sx={{ display: 'flex' }}>
         <Link
           href={entry.href}
           target="_blank"
@@ -28,8 +31,9 @@ export function EntryRow({ entry }: EntryRowProps) {
           {entry.title}
           <ArrowUpRight size={15} style={{ transition: 'transform 120ms ease' }} />
         </Link>
+        </Typography>
       ) : (
-        <Typography component="span" sx={{ fontWeight: 500 }}>
+        <Typography component="h3" sx={{ fontWeight: 500 }}>
           {entry.title}
         </Typography>
       )}
