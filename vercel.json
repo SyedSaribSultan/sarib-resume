@@ -47,7 +47,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self' 'sha256-wecun2hR3P8ayKSEefM+UskIGzDJhKyQNNwcOwQ3u8Q='; frame-ancestors 'none'; base-uri 'none'; object-src 'none'"
+          "value": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self' 'sha256-wecun2hR3P8ayKSEefM+UskIGzDJhKyQNNwcOwQ3u8Q=' https://e.syedsarib.com; connect-src 'self' https://e.syedsarib.com; frame-ancestors 'none'; base-uri 'none'; object-src 'none'"
         }
       ]
     }

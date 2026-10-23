@@ -7,8 +7,9 @@ interface SectionProps {
 }
 
 export function Section({ title, children }: SectionProps) {
+  // data-section feeds PostHog section_viewed (src/analytics.ts).
   return (
-    <Box component="section" sx={{ mt: { xs: 5, sm: 7 } }}>
+    <Box component="section" data-section={title} sx={{ mt: { xs: 5, sm: 7 } }}>
       <Typography
         component="h2"
         sx={{

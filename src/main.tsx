@@ -7,6 +7,8 @@ import './styles/fonts.css';
 // dist/resume.pdf — kept out of the normal user-facing flow and its bundle.
 const isPrint = new URLSearchParams(window.location.search).has('print');
 const root = document.getElementById('root')!;
+// PostHog loads in its own chunk so it never delays the resume's first paint.
+const initAnalytics = () => void import('./analytics').then((m) => m.initAnalytics());
 
 if (isPrint) {
   // Drop the prerendered page and its styles; the print layout is standalone.
@@ -23,6 +25,7 @@ if (isPrint) {
     </StrictMode>,
   );
 } else if (root.hasChildNodes()) {
+  initAnalytics();
   // Production: index.html already holds the prerendered resume.
   hydrateRoot(
     root,
@@ -32,6 +35,7 @@ if (isPrint) {
   );
 } else {
   // `npm run dev` serves the bare index.html.
+  initAnalytics();
   createRoot(root).render(
     <StrictMode>
       <App />
