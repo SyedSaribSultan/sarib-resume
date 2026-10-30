@@ -16,7 +16,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^9.5.0",
-    "lucide-react": "^0.454.0",
+    "lucide-react": "^1.62.0",
     "motion": "^14.4.0",
     "posthog-js": "^1.438.20",
     "react": "^19.3.1",
