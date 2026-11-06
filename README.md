@@ -114,10 +114,10 @@ Requires **Node 20+** (pinned via `engines` in `package.json`).
 
 - Light/dark palettes are defined in [`App.tsx`](src/app/components/../App.tsx)
   (`palettes`). Text colors meet **WCAG AA 4.5:1** contrast on their backgrounds.
-- The user's choice is stored in `localStorage` (`theme-mode`) and otherwise
-  follows the OS `prefers-color-scheme`.
+- Every visit starts in **light**, whatever the OS theme. A manual dark choice
+  is stored in `localStorage` (`theme-mode`) and remembered.
 - An inline script in `index.html` paints the correct background **before React
-  mounts**, so dark-mode users never see a light flash (FOUC).
+  mounts**, so a saved dark choice never shows a light flash (FOUC).
 
 ---
 

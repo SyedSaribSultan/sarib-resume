@@ -61,7 +61,7 @@ const loadMotionFeatures = () => import('./motion-features').then((m) => m.defau
 
 export default function App() {
   return (
-    <AppThemeProvider theme={theme} modeStorageKey={THEME_KEY} defaultMode="system">
+    <AppThemeProvider theme={theme} modeStorageKey={THEME_KEY} defaultMode="light">
       <CssBaseline />
       {/* Honour prefers-reduced-motion for every motion animation. */}
       <MotionConfig reducedMotion="user">

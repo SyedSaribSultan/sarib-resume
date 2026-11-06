@@ -9,8 +9,7 @@
       content="%RESUME_DESCRIPTION%"
     />
     <meta name="author" content="Syed Sarib Sultan" />
-    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#121211" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fbfbfa" />
 
     <!-- Favicon (drop files in /public) -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -52,12 +51,12 @@
     </script>
 
     <!-- Pre-paint theme: pick the colour scheme (data-theme, read by MUI's CSS
-         variables) and page background before first paint, so dark-mode users
-         never see a light flash. Mirrors App.tsx palette + storage key.
+         variables) and page background before first paint, so a saved dark choice
+         never shows a light flash. Mirrors App.tsx palette + storage key.
          Kept on ONE line: its sha256 is pinned in vercel.json's CSP (checked
          by scripts/resume-artifacts.ts at build time), and a single line is
          immune to CRLF/LF checkout differences. -->
-    <script>(function(){try{var s=localStorage.getItem('theme-mode');var d=s==='dark'||(s!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var h=document.documentElement;h.setAttribute('data-theme',d?'dark':'light');h.style.backgroundColor=d?'#121211':'#fbfbfa';}catch(e){}})();</script>
+    <script>(function(){try{var s=localStorage.getItem('theme-mode');var d=s==='dark';var h=document.documentElement;h.setAttribute('data-theme',d?'dark':'light');h.style.backgroundColor=d?'#121211':'#fbfbfa';}catch(e){}})();</script>
   </head>
   <body>
     <div id="root"></div>
