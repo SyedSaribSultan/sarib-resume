@@ -35,15 +35,16 @@ const server = await preview({ preview: { port: 4317, strictPort: false, open: f
 const url = server.resolvedUrls?.local[0];
 if (!url) throw new Error('vite preview did not report a URL');
 
-const browser = await launch();
+let browser;
 try {
+  browser = await launch();
   const page = await browser.newPage();
   await page.goto(`${url}?print`, { waitUntil: 'networkidle0' });
   await page.evaluate(() => document.fonts.ready);
   const pdf = await page.pdf({ preferCSSPageSize: true, printBackground: true });
   writeFileSync(OUT, pdf);
 } finally {
-  await browser.close();
+  await browser?.close();
   await server.close();
 }
 
