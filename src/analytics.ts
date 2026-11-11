@@ -20,21 +20,8 @@ export function initAnalytics() {
       session_recording: { maskAllInputs: true }, // typed text is never recorded
       loaded: (ph) => {
         ph.register({ site: 'resume' });
-        // Personal links: ?via=<name> names this visitor (unless they're already signed in), then leaves the URL clean.
-        try {
-          const u = new URL(location.href);
-          const via = (u.searchParams.get('via') || '').trim().toLowerCase().slice(0, 60);
-          if (via) {
-            if (ph.get_property('$user_state') !== 'identified') ph.identify('via:' + via, { name: via, via });
-            else ph.setPersonProperties({ via });
-            ph.capture('via_link_opened', { via });
-            u.searchParams.delete('via');
-            history.replaceState(history.state, '', u.pathname + (u.search || '') + u.hash);
-          }
-        } catch {
-          /* never let analytics break the page */
-        }
-        // Add-on (../analytics/TRACKING.md): machine, network, human and time-on-page signals, from one shared file.
+        // Add-on (../analytics/TRACKING.md): personal links (?via=), machine, network, human and time-on-page
+        // signals, from one shared file. It names each browser that opens a ?via link on its own.
         try {
           (window as unknown as { posthog: unknown }).posthog = ph;
           const s = document.createElement('script');
@@ -50,7 +37,8 @@ export function initAnalytics() {
     return;
   }
 
-  // Downloads: the PDF link (any <a> to /resume.pdf) and the browser's own print.
+  // Downloads: the PDF link (any <a> to /resume.pdf). The browser's print dialog is its own event,
+  // resume_print_opened: beforeprint also fires for a preview that is then cancelled, so it is not a download.
   // Outbound: contact and company links, labelled by kind, never the full URL.
   document.addEventListener(
     'click',
@@ -65,7 +53,7 @@ export function initAnalytics() {
     },
     { capture: true },
   );
-  window.addEventListener('beforeprint', () => posthog.capture('resume_downloaded', { method: 'print' }));
+  window.addEventListener('beforeprint', () => posthog.capture('resume_print_opened'));
 
   // section_viewed once per section, when it crosses the middle of the viewport.
   const seen = new Set<string>();
