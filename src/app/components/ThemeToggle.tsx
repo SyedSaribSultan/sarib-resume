@@ -36,12 +36,13 @@ export function ThemeToggle({ mode, onToggle }: ThemeToggleProps) {
       {mode === undefined ? (
         // Prerendered HTML can't know the visitor's theme, so ship both icons
         // and let the `data-theme` attribute (set before paint) pick one.
+        // Moon in light mode, sun in dark: the icon shows what you'll switch to (as on syedsarib.com).
         <>
           <Box component="span" sx={{ display: 'inline-flex', '[data-theme="dark"] &': { display: 'none' } }}>
-            <Sun size={18} />
+            <Moon size={18} />
           </Box>
           <Box component="span" sx={{ display: 'none', '[data-theme="dark"] &': { display: 'inline-flex' } }}>
-            <Moon size={18} />
+            <Sun size={18} />
           </Box>
         </>
       ) : (
@@ -54,7 +55,7 @@ export function ThemeToggle({ mode, onToggle }: ThemeToggleProps) {
             transition={{ type: 'spring', stiffness: 320, damping: 20 }}
             style={{ display: 'inline-flex' }}
           >
-            {isDark ? <Moon size={18} /> : <Sun size={18} />}
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </m.span>
         </AnimatePresence>
       )}

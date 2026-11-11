@@ -17,9 +17,10 @@ const HOVER_DEBOUNCE_MS = 120;
  * Behaviour / guardrails:
  * - Honours `prefers-reduced-motion: reduce` — fully silent for those users.
  * - Hover blips are gated to fine pointers (no hover concept on touch).
- * - The AudioContext is created lazily on the first real user gesture, so we
- *   never trip the browser autoplay policy (which would log a console warning
- *   and leave the context suspended).
+ * - The AudioContext is created only inside a click or key press (a real user
+ *   gesture), so we never trip the browser autoplay policy (which would log a
+ *   console warning and leave the context suspended). Hover blips start after
+ *   the first click; hovering alone never creates or resumes it.
  */
 export function useUiSounds() {
   useEffect(() => {
@@ -105,8 +106,8 @@ export function useUiSounds() {
     const onOver = (e: MouseEvent) => {
       const el = isInteractive(e);
       if (!el) return;
-      const audio = ensureCtx();
-      if (!audio) return;
+      const audio = ctx;
+      if (!audio || audio.state !== 'running') return;
       const now = audio.currentTime * 1000;
       // Same element within the debounce window → stay quiet.
       if (el === lastHoverEl && now - lastHoverAt < HOVER_DEBOUNCE_MS) return;

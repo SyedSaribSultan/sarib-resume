@@ -75,8 +75,13 @@ export default function App() {
 
 function Resume() {
   // `mode` is undefined on the server and during hydration, then resolves.
-  const { mode, systemMode, setMode } = useColorScheme();
-  const resolved = mode === 'system' ? systemMode : mode;
+  const { mode, setMode } = useColorScheme();
+  // Only light and dark exist here. A stored "system" (older visits) is painted light by the pre-paint
+  // script, so it becomes light too instead of flashing to the OS theme.
+  useEffect(() => {
+    if (mode === 'system') setMode('light');
+  }, [mode, setMode]);
+  const resolved = mode === 'system' ? 'light' : mode;
 
   // Subtle clicky hover/click sounds (synthesised, reduced-motion aware).
   useUiSounds();
