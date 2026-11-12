@@ -17,6 +17,7 @@ import { EntryRow } from './components/EntryRow';
 import { ThemeToggle } from './components/ThemeToggle';
 import { DownloadButton } from './components/DownloadButton';
 import { useUiSounds } from './components/useUiSounds';
+import { SoundToggle, useSoundPreference } from './components/SoundToggle';
 import { AppThemeProvider } from './components/AppThemeProvider';
 import { profile, contacts, experience, skills, volunteering, education } from './components/resume-data';
 import profilePhoto from '../imports/Syed_Sarib_Sultan.jpg';
@@ -83,8 +84,9 @@ function Resume() {
   }, [mode, setMode]);
   const resolved = mode === 'system' ? 'light' : mode;
 
-  // Subtle clicky hover/click sounds (synthesised, reduced-motion aware).
-  useUiSounds();
+  // Subtle clicky hover/click sounds (synthesised, reduced-motion aware), with a remembered mute.
+  const sound = useSoundPreference();
+  useUiSounds(sound.muted);
 
   const [finePointer, setFinePointer] = useState(false);
   useEffect(() => {
@@ -107,6 +109,7 @@ function Resume() {
         mode={resolved}
         onToggle={() => setMode(resolved === 'dark' ? 'light' : 'dark')}
       />
+      {sound.available && <SoundToggle muted={sound.muted} onToggle={sound.toggle} />}
       <Box
         sx={{
           minHeight: '100vh',

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 // Same set CustomCursor treats as "interactive" — keep them in sync.
 const INTERACTIVE_SELECTOR = 'a, button, [role="button"], .MuiChip-root';
@@ -21,8 +21,13 @@ const HOVER_DEBOUNCE_MS = 120;
  *   gesture), so we never trip the browser autoplay policy (which would log a
  *   console warning and leave the context suspended). Hover blips start after
  *   the first click; hovering alone never creates or resumes it.
+ * - `muted` (the SoundToggle) silences everything and, while on, never creates
+ *   the context at all.
  */
-export function useUiSounds() {
+export function useUiSounds(muted = false) {
+  const mutedRef = useRef(muted);
+  mutedRef.current = muted;
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -64,7 +69,7 @@ export function useUiSounds() {
       type: OscillatorType = 'sine',
     ) => {
       const audio = ctx;
-      if (!audio || audio.state !== 'running') return;
+      if (mutedRef.current || !audio || audio.state !== 'running') return;
 
       const now = audio.currentTime;
       const dur = durationMs / 1000;
@@ -117,7 +122,7 @@ export function useUiSounds() {
     };
 
     const onPointerDown = (e: Event) => {
-      if (!isInteractive(e)) return;
+      if (mutedRef.current || !isInteractive(e)) return;
       ensureCtx();
       playClick();
     };
@@ -126,7 +131,7 @@ export function useUiSounds() {
     // activation via the separate keydown handler below.
     document.addEventListener('pointerdown', onPointerDown);
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== 'Enter' && e.key !== ' ') return;
+      if (mutedRef.current || (e.key !== 'Enter' && e.key !== ' ')) return;
       const el = (document.activeElement as Element | null)?.closest?.(
         INTERACTIVE_SELECTOR,
       );
