@@ -1,4 +1,5 @@
 import posthog from 'posthog-js';
+import { configFor, readConsent } from './consent';
 
 /*
  * PostHog for every syedsarib.com site. Config is the shared one from
@@ -6,18 +7,23 @@ import posthog from 'posthog-js';
  * `site` changes per site. Events go through our proxy e.syedsarib.com, which
  * the CSP in vercel.json allows. Not called on the `?print` route, so the PDF
  * render at build time sends nothing.
+ * Consent (consent.ts): cookieless, no profiles and no replay until the visitor accepts in the consent bar;
+ * then the full shared setup. plus.js holds back IP lookups and ?via naming until then too.
  */
 export function initAnalytics() {
+  const w = window as unknown as { __saribConsentMode?: boolean; __saribConsentGranted?: boolean };
+  w.__saribConsentMode = true;
+  w.__saribConsentGranted = readConsent() === 'accepted';
   try {
     posthog.init('phc_sui4roRPYQyGvFR8m3zYSxaX4DLDfjs8YeTuyJKZydkP', {
       api_host: 'https://e.syedsarib.com', // our managed proxy: ad blockers don't drop events
       ui_host: 'https://eu.posthog.com',
       defaults: '2026-08-30',
-      person_profiles: 'always', // a profile for every visitor, not only signed-in ones
-      cross_subdomain_cookie: true, // one visitor = one person across every *.syedsarib.com site
+      cross_subdomain_cookie: true, // once accepted, one visitor = one person across every *.syedsarib.com site
       enable_heatmaps: true,
       capture_performance: { web_vitals: true },
       session_recording: { maskAllInputs: true }, // typed text is never recorded
+      ...configFor(readConsent()),
       loaded: (ph) => {
         ph.register({ site: 'resume' });
         // Add-on (../analytics/TRACKING.md): personal links (?via=), machine, network, human and time-on-page
@@ -25,7 +31,9 @@ export function initAnalytics() {
         try {
           (window as unknown as { posthog: unknown }).posthog = ph;
           const s = document.createElement('script');
-          s.src = 'https://analytics.syedsarib.com/t/plus.js';
+          s.src = 'https://analytics.syedsarib.com/t/plus.v1.js';
+          s.integrity = 'sha384-1s2AAFu4eJGpYiqxssEydytEhNuvWm4Oo+tOZ/7tmk2OBvmgxSH1z/qLGEwSPe0g'; // frozen copy; see ../analytics/TRACKING.md
+          s.crossOrigin = 'anonymous';
           s.async = true;
           document.head.appendChild(s);
         } catch {
@@ -74,7 +82,6 @@ export function initAnalytics() {
 
 function outboundTarget(href: string): string | null {
   if (href.startsWith('mailto:')) return 'email';
-  if (href.startsWith('tel:')) return 'phone';
   let host: string;
   try {
     host = new URL(href, location.href).hostname.replace(/^www\./, '');

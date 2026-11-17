@@ -60,7 +60,6 @@ export const topics = [
 export const contacts: LabeledLink[] = [
   { id: 'email', label: 'Email', value: 'syedsaribsultan@gmail.com', href: 'mailto:syedsaribsultan@gmail.com' },
   { id: 'linkedin', label: 'LinkedIn', value: 'in/syedsaribsultanyac270', href: 'https://linkedin.com/in/syedsaribsultanyac270' },
-  { id: 'phone', label: 'Phone', value: '+92 333 5788859', href: 'tel:+923335788859' },
 ];
 
 export const experience: ResumeEntry[] = [

@@ -18,6 +18,7 @@ import { ThemeToggle } from './components/ThemeToggle';
 import { DownloadButton } from './components/DownloadButton';
 import { useUiSounds } from './components/useUiSounds';
 import { SoundToggle, useSoundPreference } from './components/SoundToggle';
+import { ConsentBar, CookieChoicesLink } from './components/ConsentBar';
 import { AppThemeProvider } from './components/AppThemeProvider';
 import { profile, contacts, experience, skills, volunteering, education } from './components/resume-data';
 import profilePhoto from '../imports/Syed_Sarib_Sultan.jpg';
@@ -109,6 +110,7 @@ function Resume() {
         mode={resolved}
         onToggle={() => setMode(resolved === 'dark' ? 'light' : 'dark')}
       />
+      <ConsentBar />
       {sound.available && <SoundToggle muted={sound.muted} onToggle={sound.toggle} />}
       <Box
         sx={{
@@ -249,12 +251,15 @@ function Resume() {
 
           {/* Footer */}
           {/* The year is prerendered at build time; tolerate a stale one. */}
-          <Typography
-            suppressHydrationWarning
-            sx={{ mt: { xs: 6, sm: 8 }, fontSize: '1rem', color: 'text.disabled' }}
+          <Stack
+            direction="row"
+            sx={{ mt: { xs: 6, sm: 8 }, columnGap: 3, rowGap: 0.5, flexWrap: 'wrap', alignItems: 'baseline' }}
           >
-            © {new Date().getFullYear()} {profile.name}
-          </Typography>
+            <Typography suppressHydrationWarning sx={{ fontSize: '1rem', color: 'text.disabled' }}>
+              © {new Date().getFullYear()} {profile.name}
+            </Typography>
+            <CookieChoicesLink />
+          </Stack>
         </Container>
       </Box>
     </>
