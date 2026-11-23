@@ -3,6 +3,7 @@ import {
   profile,
   contacts,
   experience,
+  projects,
   skills,
   education,
   type ResumeEntry,
@@ -213,6 +214,13 @@ export function PrintResume() {
       <section style={{ paddingBottom: SECTION_GAP }}>
         {experience.map((e, i) => (
           <EntryGroup key={e.id} e={e} label={i === 0 ? 'Experience' : undefined} />
+        ))}
+      </section>
+
+      {/* Projects */}
+      <section style={{ paddingBottom: SECTION_GAP }}>
+        {projects.map((e, i) => (
+          <EntryGroup key={e.id} e={e} label={i === 0 ? 'Projects' : undefined} />
         ))}
       </section>
 

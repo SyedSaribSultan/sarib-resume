@@ -44,7 +44,7 @@ export const profile = {
   site: 'syedsarib.com',
   siteHref: 'https://syedsarib.com',
   about:
-    'Product designer who owns the work end to end and ties it to the numbers it moves. I cover the whole craft, from research and UX to interface, interaction, and design systems, and on consumer AI products, now at HeyOz and before that at ImagineArt and ImagineComputer (formerly Chatly), that runs into onboarding, pricing, and growth too, with every flow built to move conversion and ROAS. With a Computer Science background, I prototype in code and use Figma MCP and Claude Code to hand engineers a spec they can build from.',
+    'Product design engineer who designs, builds, and measures consumer AI products end to end. I cover product design, front-end engineering, and growth in one role, so a flow goes from an unclear problem to something live and measured without stalling between handoffs. Now at HeyOz, and before that at ImagineArt and ImagineComputer (formerly Chatly), on products with over a million signups. With a Computer Science background, I ship in code, use Figma MCP and Claude Code to prototype roughly 10x faster, and run nine live products of my own.',
 };
 
 // Search-engine topics for the JSON-LD `knowsAbout` field (not shown on the page).
@@ -55,11 +55,14 @@ export const topics = [
   'Growth Design',
   'AI Product Design',
   'Conversion Optimization',
+  'Design Engineering',
+  'Front-End Development',
 ];
 
 export const contacts: LabeledLink[] = [
   { id: 'email', label: 'Email', value: 'syedsaribsultan@gmail.com', href: 'mailto:syedsaribsultan@gmail.com' },
   { id: 'linkedin', label: 'LinkedIn', value: 'in/syedsaribsultanyac270', href: 'https://linkedin.com/in/syedsaribsultanyac270' },
+  { id: 'github', label: 'GitHub', value: 'SyedSaribSultan', href: 'https://github.com/SyedSaribSultan' },
 ];
 
 export const experience: ResumeEntry[] = [
@@ -70,7 +73,15 @@ export const experience: ResumeEntry[] = [
     subtitle: 'HeyOz',
     href: 'https://heyoz.com',
     meta: 'US · Remote',
-    description: 'Product design, growth, and engineering at HeyOz, an AI ad-creative platform for DTC brands and agencies.',
+    description: 'Product design, growth, and engineering at HeyOz, an AI ad-creative platform for DTC brands and agencies. I design the core creation experience and ship parts of it in code.',
+    sections: [
+      { label: 'Core Product', text: 'Designed the image and video studios, now the two most used surfaces in the product. Weekly visits to them grew more than **40x** in four months.' },
+      { label: 'Composer & AI', text: 'Designed the shared prompt composer with brand controls, then designed and built Enhance, a one-click prompt rewrite. Weekly active creators grew from near zero to well over **1,000**.' },
+      { label: 'Reliability', text: 'Added a creative-direction stage and a stronger default image model. Failed generations **more than halved**.' },
+      { label: 'Growth', text: 'Designed the pricing page, the AI model pages, and the onboarding step that records where users come from. With me on the team, weekly signups grew about **8x** in five months.' },
+      { label: 'Design System', text: 'Built the design token foundation the whole app is styled from.' },
+      { label: 'Also Shipped', text: 'Designed the UGC and influencer studio, in-product feedback on results, and the announcement system for new features.' },
+    ],
   },
   {
     id: 'vyro',
@@ -79,7 +90,7 @@ export const experience: ResumeEntry[] = [
     subtitle: 'Vyro',
     href: 'https://imagine.art',
     meta: 'On-site, Islamabad, PK',
-    description: 'Drove design across ImagineArt and ImagineComputer, scaling the shared design system and owning AI features end to end, with every flow built to move conversion and ROAS.',
+    description: 'Drove design across ImagineArt and ImagineComputer, consumer AI products with over **1M** signups, scaling the shared design system and owning AI features end to end, with every flow built to move conversion and ROAS.',
     sections: [
       { label: 'Leadership', text: 'Owned genAI features end to end, concept to dev-ready handoff.' },
       { label: 'Engineering', text: 'Used Figma MCP and Claude Code to prototype and test roughly **10x** faster, cutting design-to-dev handoff friction.' },
@@ -167,31 +178,55 @@ export const experience: ResumeEntry[] = [
   },
 ];
 
+export const projects: ResumeEntry[] = [
+  {
+    id: 'own-products',
+    period: 'Jun 2026 — Present',
+    title: 'Nine live products',
+    href: 'https://syedsarib.com',
+    meta: 'Designed, built, and run solo',
+    description: 'An AI whiteboard, a coding agent, a private money tracker, an image compressor, and more, all live on syedsarib.com at zero monthly cost.',
+    sections: [
+      { label: 'Output', text: '**1,575** commits across **28** repositories alongside a full-time role, including **298** commits on one product in under four weeks.' },
+      { label: 'Performance', text: 'Mobile Lighthouse scores of **96 to 99**. Cut load time from up to 2.8 s to about **0.5 s**, database latency from about 290 ms to about **52 ms**, and memory use by **25 to 40%**.' },
+      { label: 'AI', text: 'Built an agent that shows its first result in **1.94 s** and a full board in **8.8 s** from a single AI call.' },
+      { label: 'Quality & Security', text: 'Audited all nine apps with no critical findings and shipped the fixes the same day. Audited **277** state machines and fixed **218** in one day. About **675** automated tests across three products.' },
+      { label: 'Design System', text: 'One design system shared across **six** apps, generated from tokens.' },
+      { label: 'Publishing', text: '**1,879** icon pages and **35** sourced guides for design and computer science students.' },
+    ],
+  },
+];
+
 export const skills: SkillGroup[] = [
   {
     id: 'design',
     label: 'Design',
-    value: 'Product & UX design, interaction design, design systems, prototyping, responsive layouts across breakpoints',
+    value: 'Product & UX design, interaction design, design systems and tokens, prototyping, responsive layouts across breakpoints',
   },
   {
     id: 'build',
     label: 'Build',
-    value: 'Front-end and HTML prototypes, AI product building, prompt engineering, agentic dev tools',
+    value: 'React, Next.js, TypeScript, Tailwind CSS, front-end and HTML prototypes, performance, accessibility, web security',
+  },
+  {
+    id: 'ai',
+    label: 'AI',
+    value: 'AI product design, prompt engineering, AI agents and evaluation, agentic dev tools, image and video models (Kling, Seedance, Veo, Nano Banana, fal API)',
   },
   {
     id: 'growth',
     label: 'Growth',
-    value: 'Paywall and upgrade flows, pricing and credit packs, referral systems, onboarding, conversion copywriting, A/B testing',
+    value: 'Paywall and upgrade flows, pricing and credit packs, referral systems, onboarding, conversion copywriting, A/B testing, SEO',
   },
   {
     id: 'data',
     label: 'Data',
-    value: 'Mixpanel funnels and retention analysis, GrowthBook, defining the metric a design should move',
+    value: 'PostHog and Mixpanel funnels and retention analysis, GrowthBook, defining the metric a design should move',
   },
   {
     id: 'tools',
     label: 'Tools',
-    value: 'Figma, Mixpanel, GrowthBook, Notion, AI image and video models (Kling, Seedance, Veo, Nano Banana, fal API)',
+    value: 'Figma, Figma MCP, Claude Code, PostHog, Mixpanel, GrowthBook, Notion, Vercel, Cloudflare',
   },
 ];
 

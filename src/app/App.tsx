@@ -20,7 +20,7 @@ import { useUiSounds } from './components/useUiSounds';
 import { SoundToggle, useSoundPreference } from './components/SoundToggle';
 import { ConsentBar, CookieChoicesLink } from './components/ConsentBar';
 import { AppThemeProvider } from './components/AppThemeProvider';
-import { profile, contacts, experience, skills, volunteering, education } from './components/resume-data';
+import { profile, contacts, experience, projects, skills, volunteering, education } from './components/resume-data';
 import profilePhoto from '../imports/Syed_Sarib_Sultan.jpg';
 
 const palettes = {
@@ -209,6 +209,13 @@ function Resume() {
           {/* Work Experience */}
           <Section title="Work Experience">
             {experience.map((e) => (
+              <EntryRow key={e.id} entry={e} />
+            ))}
+          </Section>
+
+          {/* Projects */}
+          <Section title="Projects">
+            {projects.map((e) => (
               <EntryRow key={e.id} entry={e} />
             ))}
           </Section>
