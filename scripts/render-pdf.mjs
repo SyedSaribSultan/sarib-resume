@@ -1,7 +1,7 @@
 // Renders dist/resume.pdf from the built site's `?print` layout (PrintResume.tsx).
 // Runs after `vite build`, so the PDF always matches resume-data.ts.
 //
-// Browser: on Vercel / Linux CI, @sparticuz/chromium (a headless Chromium that
+// Browser: on Linux CI without Chrome, @sparticuz/chromium (a headless Chromium that
 // runs on Amazon Linux). Locally, your installed Chrome, or set CHROME_PATH.
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { preview } from 'vite';

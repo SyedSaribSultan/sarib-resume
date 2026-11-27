@@ -10,7 +10,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build && node scripts/prerender.mjs && node scripts/render-pdf.mjs",
     "preview": "vite preview",
-    "pdf": "node scripts/render-pdf.mjs"
+    "pdf": "node scripts/render-pdf.mjs",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -30,6 +31,7 @@
     "@vitejs/plugin-react": "^5.2.0",
     "puppeteer-core": "^25.13.0",
     "typescript": "^7.0.2",
-    "vite": "^7.3.7"
+    "vite": "^7.3.7",
+    "wrangler": "^4.137.0"
   }
 }

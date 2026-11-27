@@ -15,7 +15,7 @@ themed CV. Live at **https://resume.syedsarib.com**.
 | Motion   | [`motion`](https://motion.dev) — custom cursor + theme toggle    |
 | Icons    | [`lucide-react`](https://lucide.dev)                             |
 | Font     | Self-hosted Google Sans Flex (woff2)                              |
-| Hosting  | Vercel (Git-connected, auto-deploy on push to `main`)            |
+| Hosting  | Cloudflare Workers static assets (auto-deploy from CI on push)   |
 
 There is no router and no backend — it's a static SPA. All content is data-driven
 from a single TypeScript file.
@@ -49,7 +49,7 @@ from a single TypeScript file.
 │   │   └── *.woff2                 # The font files
 │   └── imports/
 │       └── Syed_Sarib_Sultan.jpg   # Profile photo (EXIF-stripped, 192×256)
-├── vercel.json               # Framework, build, cache + security headers
+├── wrangler.jsonc            # Cloudflare Worker + static assets config
 ├── vite.config.ts            # Plugins + manual vendor chunk splitting
 └── tsconfig.json
 ```
@@ -73,7 +73,7 @@ from a single TypeScript file.
 > portfolio after a resume change** (its `prebuild` fetches the new data).
 >
 > The PDF is the `?print` route printed by headless Chromium
-> (`@sparticuz/chromium` on Vercel, your local Chrome otherwise; set
+> (`@sparticuz/chromium` on Linux CI without Chrome, your local Chrome otherwise; set
 > `CHROME_PATH` to override). The build logs its page count and warns if it
 > isn't one page. `npm run pdf` re-renders it from an existing `dist/`.
 
@@ -127,23 +127,23 @@ Requires **Node 20+** (pinned via `engines` in `package.json`).
   to 192×256 (2× its 96px display size) before commit. Keep it small; Vite hashes and
   emits it into `dist/assets/`.
 - Favicon, apple-touch-icon, and the OG image live in `public/` (NOT `dist/` —
-  `dist/` is wiped and rebuilt on every Vercel deploy).
+  `dist/` is wiped and rebuilt on every deploy).
 
 ---
 
-## Deploy (Vercel)
+## Deploy (Cloudflare)
 
-Connected to this GitHub repo. **Every push to `main` triggers a production build.**
-All config is in [`vercel.json`](vercel.json):
+Served by **Cloudflare Workers static assets** (Worker `sarib-resume`, custom domain `resume.syedsarib.com`, free plan).
+Config is in [`wrangler.jsonc`](wrangler.jsonc) and [`public/_headers`](public/_headers):
 
-- Framework `vite`, build `npm run build`, output `dist`
+- `npm run deploy` builds and runs `wrangler deploy` (after `wrangler login` once). The GitHub `CI` workflow does the same on every push to `main` once the repo secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` exist.
 - No rewrites: `index.html` is served at `/`, unknown paths 404
 - `Cache-Control: immutable` (1 year) on hashed `/assets/*`
-- Security headers: CSP (inline theme script allowed by `sha256` hash — the build
+- Security headers: CSP (inline theme script allowed by `sha256` hash; the build
   fails if `index.html`'s inline script changes without updating it), `X-Frame-Options: DENY`, `X-Content-Type-Options`,
-  `Referrer-Policy`, `Permissions-Policy`
+  `Referrer-Policy`, `Permissions-Policy`, `Strict-Transport-Security`
 
-> **Domain note:** the old `sarib-resume.vercel.app` 301-redirects here (see `redirects` in `vercel.json`).
+> **Domain note:** the old Vercel project (and its `sarib-resume.vercel.app` redirect) is gone; the site moved to Cloudflare on 28 Nov 2026.
 >
 > Also: absolute URLs (OG image, canonical, JSON-LD, sitemap, robots,
 > llms.txt, resume.json) use `https://resume.syedsarib.com` (`SITE_URL` in

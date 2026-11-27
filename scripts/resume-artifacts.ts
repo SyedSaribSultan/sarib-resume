@@ -10,7 +10,7 @@
  *
  * At build time it also preloads the main (latin) font and fails the build if
  * an inline <script> in index.html is not allowed by a sha256 hash in
- * vercel.json's Content-Security-Policy (which has no 'unsafe-inline').
+ * public/_headers' Content-Security-Policy (which has no 'unsafe-inline').
  */
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
@@ -139,18 +139,15 @@ function transformHtml(html: string): string {
     .replace('%RESUME_JSONLD%', JSON.stringify(jsonLd(), null, 2).replace(/</g, '\u003c'));
 }
 
-/** Every inline classic <script> must have its sha256 in vercel.json's CSP. */
+/** Every inline classic <script> must have its sha256 in the CSP in public/_headers. */
 function assertInlineScriptsAllowedByCsp(html: string) {
-  const vercel = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
-  const csp: string =
-    vercel.headers
-      .flatMap((h: { headers: { key: string; value: string }[] }) => h.headers)
-      .find((h: { key: string }) => h.key === 'Content-Security-Policy')?.value ?? '';
+  const headersFile = readFileSync(new URL('../public/_headers', import.meta.url), 'utf8');
+  const csp = headersFile.match(/^\s*Content-Security-Policy:\s*(.+)$/m)?.[1] ?? '';
   // Skips <script src=...> and non-JS types such as application/ld+json.
   for (const m of html.matchAll(/<script(?![^>]*\b(?:src|type)=)[^>]*>([\s\S]*?)<\/script>/g)) {
     const hash = `'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`;
     if (!csp.includes(hash)) {
-      throw new Error(`Inline script not allowed by vercel.json CSP. Add ${hash} to script-src.`);
+      throw new Error(`Inline script not allowed by the CSP in public/_headers. Add ${hash} to script-src.`);
     }
   }
 }

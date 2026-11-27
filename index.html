@@ -54,7 +54,7 @@
     <!-- Pre-paint theme: pick the colour scheme (data-theme, read by MUI's CSS
          variables) and page background before first paint, so dark-mode users
          never see a light flash. Mirrors App.tsx palette + storage key.
-         Kept on ONE line: its sha256 is pinned in vercel.json's CSP (checked
+         Kept on ONE line: its sha256 is pinned in public/_headers' CSP (checked
          by scripts/resume-artifacts.ts at build time), and a single line is
          immune to CRLF/LF checkout differences. -->
     <script>(function(){try{var s=localStorage.getItem('theme-mode');var d=s==='dark'||(s!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);var h=document.documentElement;h.setAttribute('data-theme',d?'dark':'light');h.style.backgroundColor=d?'#121211':'#fbfbfa';}catch(e){}})();</script>

@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // resume.syedsarib.com: a static site (Vite build in dist/), served by Workers static assets on the free plan (d-020).
+  // Headers (CSP, immutable asset cache) come from public/_headers, copied into dist/ by the build.
+  "name": "sarib-resume",
+  "compatibility_date": "2026-10-20",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "observability": { "enabled": false }
+}

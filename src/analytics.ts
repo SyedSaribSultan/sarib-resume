@@ -5,7 +5,7 @@ import { configFor, readConsent } from './consent';
  * PostHog for every syedsarib.com site. Config is the shared one from
  * ../analytics/snippet/posthog-init.js (spec: ../analytics/TRACKING.md); only
  * `site` changes per site. Events go through our proxy e.syedsarib.com, which
- * the CSP in vercel.json allows. Not called on the `?print` route, so the PDF
+ * the CSP in public/_headers allows. Not called on the `?print` route, so the PDF
  * render at build time sends nothing.
  * Consent (consent.ts): cookieless, no profiles and no replay until the visitor accepts in the consent bar;
  * then the full shared setup. plus.js holds back IP lookups and ?via naming until then too.

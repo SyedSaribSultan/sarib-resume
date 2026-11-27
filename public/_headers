@@ -1,0 +1,23 @@
+# Cloudflare Workers static assets headers. Mirrors the old vercel.json, plus the two headers Vercel added on its own
+# (HSTS, and Access-Control-Allow-Origin on static files) so nothing changes for visitors or for SaribLM's resume.json fetch.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), camera=(), microphone=()
+  Strict-Transport-Security: max-age=63072000
+  Access-Control-Allow-Origin: *
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self' 'sha256-wecun2hR3P8ayKSEefM+UskIGzDJhKyQNNwcOwQ3u8Q=' https://e.syedsarib.com https://analytics.syedsarib.com; connect-src 'self' https://e.syedsarib.com https://analytics.syedsarib.com; frame-ancestors 'none'; base-uri 'none'; object-src 'none'
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Vercel sent these with a charset; Workers assets do not, so say it (keeps non-ASCII text correct).
+/
+  Content-Type: text/html; charset=utf-8
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+/resume.json
+  Content-Type: application/json; charset=utf-8

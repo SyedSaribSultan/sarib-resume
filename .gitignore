@@ -23,5 +23,5 @@ npm-debug.log*
 
 # Local agent config
 .claude/
-.vercel
 .env*.local
+.wrangler/
